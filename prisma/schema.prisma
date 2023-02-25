@@ -9,3 +9,260 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+//* User *//
+model User {
+  id         String     @id @default(uuid())
+  username   String
+  email      String     @unique
+  password   String
+  status     Boolean
+  role       String
+  created_at DateTime   @default(now())
+  Phones     Phone[]
+  Addresses  Address[]
+  Customers  Customer[]
+  Owners     Owner[]
+
+  @@map("_users")
+}
+
+//* Address *//
+model Address {
+  id          String   @id @default(uuid())
+  city        String
+  contry      String
+  hood        String
+  postal_code Boolean
+  created_at  DateTime @default(now())
+  id_user     String
+  user        User     @relation(fields: [id_user], references: [id])
+  Shoppies    Shop[]
+
+  @@map("_addresses")
+}
+
+//* Phone *//
+model Phone {
+  id         String   @id @default(uuid())
+  number     String
+  id_user    String
+  created_at DateTime @default(now())
+  user       User     @relation(fields: [id_user], references: [id])
+
+  @@map("_phones")
+}
+
+//* Discount *//
+model Discount {
+  id          String    @id @default(uuid())
+  name        String
+  description String
+  percent     Int
+  status      Boolean
+  created_at  DateTime  @default(now())
+  Products    Product[]
+
+  @@map("_discounts")
+}
+
+//* Category *//
+model Category {
+  id          String    @id @default(uuid())
+  name        String
+  description String
+  created_at  DateTime  @default(now())
+  Products    Product[]
+
+  @@map("_categories")
+}
+
+//* Product *//
+model Product {
+  id          String   @id @default(uuid())
+  name        String
+  description String
+  price       Decimal
+  quantity    Int
+  starts_at   DateTime @default(now())
+  ends_at     DateTime @default(now())
+  id_category String
+  id_discount String
+  created_at  DateTime @default(now())
+
+  ProductShoppies ProductShop[]
+  ProductImages   ProductImages[]
+
+  category Category @relation(fields: [id_category], references: [id])
+  discount Discount @relation(fields: [id_discount], references: [id])
+
+  @@map("_products")
+}
+
+//* Customer *//
+model Customer {
+  id              String       @id @default(uuid())
+  firstName       String
+  lastName        String
+  idenntity       String
+  dateBorn        DateTime     @db.Date
+  id_customerType String
+  id_user         String
+  id_order        String
+  created_at      DateTime     @default(now())
+  Orders          Order[]
+  Carts           Cart[]
+  user            User         @relation(fields: [id_user], references: [id])
+  customerType    CustomerType @relation(fields: [id_customerType], references: [id])
+
+  @@map("_customers")
+}
+
+//* CustomerType *//
+model CustomerType {
+  id          String     @id @default(uuid())
+  name        String
+  description String
+  created_at  DateTime   @default(now())
+  Customers   Customer[]
+
+  @@map("_customers_types")
+}
+
+//* Order *//
+model Order {
+  id                String             @id @default(uuid())
+  id_session        String
+  total             Decimal
+  totalDiscount     Decimal
+  token             String
+  status            String
+  id_customer       String
+  created_at        DateTime           @default(now())
+  Payments          Payment[]
+  Delives           Delivy[]
+  ProductShopOrders ProductShopOrder[]
+  customer          Customer           @relation(fields: [id_customer], references: [id])
+
+  @@map("_orders")
+}
+
+//* Payment *//
+model Payment {
+  id             String   @id @default(uuid())
+  code           String
+  mode           String
+  status         String
+  id_paymentType String
+  id_order       String
+  created_at     DateTime @default(now())
+
+  paymentType PaymentType @relation(fields: [id_paymentType], references: [id])
+  order       Order       @relation(fields: [id_order], references: [id])
+
+  @@map("_payments")
+}
+
+//* PaymentType *//
+model PaymentType {
+  id          String    @id @default(uuid())
+  name        String
+  description String
+  id_payment  String
+  created_at  DateTime  @default(now())
+  Payments    Payment[]
+
+  @@map("_payments_types")
+}
+
+//* Owner *//
+model Owner {
+  id         String   @id @default(uuid())
+  firstName  String
+  lastName   String
+  idenntity  String
+  dateBorn   DateTime @db.Date
+  id_user    String
+  created_at DateTime @default(now())
+  Shoppies   Shop[]
+  user       User     @relation(fields: [id_user], references: [id])
+
+  @@map("_owners")
+}
+
+//* Shop *//
+model Shop {
+  id              String        @id @default(uuid())
+  name            String
+  id_address      String
+  id_owner        String
+  created_at      DateTime      @default(now())
+  ProductShoppies ProductShop[]
+  address         Address       @relation(fields: [id_address], references: [id])
+  owner           Owner         @relation(fields: [id_owner], references: [id])
+
+  @@map("_shoppies")
+}
+
+//* ProductShop *//
+model ProductShop {
+  id                String             @id @default(uuid())
+  id_shop           String
+  id_product        String
+  created_at        DateTime           @default(now())
+  ProductShopOrders ProductShopOrder[]
+
+  shop    Shop    @relation(fields: [id_shop], references: [id])
+  product Product @relation(fields: [id_product], references: [id])
+
+  @@map("_products_shoppies")
+}
+
+//* Cart *//
+model Cart {
+  id          String   @id @default(uuid())
+  id_session  String
+  token       String
+  status      String
+  id_customer String
+  created_at  DateTime @default(now())
+
+  customer Customer @relation(fields: [id_customer], references: [id])
+
+  @@map("_carts")
+}
+
+//* Delivy *//
+model Delivy {
+  id         String   @id @default(uuid())
+  location   String
+  status     String
+  id_order   String
+  created_at DateTime @default(now())
+
+  order Order @relation(fields: [id_order], references: [id])
+
+  @@map("_delives")
+}
+
+//* ProductOrder *//
+model ProductShopOrder {
+  id             String      @id @default(uuid())
+  id_order       String
+  order          Order       @relation(fields: [id_order], references: [id])
+  id_productShop String
+  productShop    ProductShop @relation(fields: [id_productShop], references: [id])
+
+  @@map("_product_shop_orders")
+}
+
+//* ProductImages *//
+model ProductImages {
+  id         String   @id @default(uuid())
+  url        String
+  id_product String
+  created_at DateTime @default(now())
+  product    Product  @relation(fields: [id_product], references: [id])
+
+  @@map("_product_images")
+}
