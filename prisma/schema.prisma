@@ -18,6 +18,7 @@ model User {
   password   String
   status     Boolean
   role       String
+  avatar     String
   created_at DateTime   @default(now())
   Phones     Phone[]
   Addresses  Address[]
@@ -33,7 +34,7 @@ model Address {
   city        String
   contry      String
   hood        String
-  postal_code Boolean
+  postal_code String
   created_at  DateTime @default(now())
   id_user     String
   user        User     @relation(fields: [id_user], references: [id])
@@ -104,11 +105,10 @@ model Customer {
   id              String       @id @default(uuid())
   firstName       String
   lastName        String
-  idenntity       String
+  identity        String
   dateBorn        DateTime     @db.Date
   id_customerType String
   id_user         String
-  id_order        String
   created_at      DateTime     @default(now())
   Orders          Order[]
   Carts           Cart[]
@@ -168,7 +168,6 @@ model PaymentType {
   id          String    @id @default(uuid())
   name        String
   description String
-  id_payment  String
   created_at  DateTime  @default(now())
   Payments    Payment[]
 
@@ -180,7 +179,7 @@ model Owner {
   id         String   @id @default(uuid())
   firstName  String
   lastName   String
-  idenntity  String
+  identity   String
   dateBorn   DateTime @db.Date
   id_user    String
   created_at DateTime @default(now())
