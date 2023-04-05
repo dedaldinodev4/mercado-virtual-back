@@ -29,6 +29,14 @@ import { findByIdDiscountFactory } from "../usecases/Discount/FindByIdDiscount/F
 import { updateDiscountFactory } from "../usecases/Discount/UpdateDiscount/UpdateDiscountFactory";
 import { deleteDiscountFactory } from "../usecases/Discount/DeleteDiscount/DeleteDiscountFactory";
 
+//* Addresses *//
+import { createAddressFactory } from "../usecases/Address/CreateAddress/CreateAddressFactory";
+import { findAllAddressesFactory } from "../usecases/Address/FindAllAddresses/FindAllAddressesFactory";
+import { findByIdAddressFactory } from "../usecases/Address/FindByIdAddress/FindByIdAddressFactory";
+import { updateAddressFactory } from "../usecases/Address/UpdateAddress/UpdateAddressFactory";
+import { deleteAddressFactory } from "../usecases/Address/DeleteAddress/DeleteAddressFactory";
+import { findByIdUserAddressFactory } from "../usecases/Address/FindByIdUserAddress/FindByIdUserAddressFactory";
+
 const router = Router();
 
 //* Auth Routes *//
@@ -59,6 +67,14 @@ router.get(`/api/v1/discounts`, (request, response) => { return findAllDiscounts
 router.get(`/api/v1/discounts/:id`, (request, response) => { return findByIdDiscountFactory().handle(request, response) } )
 router.put(`/api/v1/discounts/:id`, (request, response) => { return updateDiscountFactory().handle(request, response) } )
 router.delete(`/api/v1/discounts/:id`, (request, response) => { return deleteDiscountFactory().handle(request, response) } )
+
+//* Addresses Routes*//
+router.post(`/api/v1/addresses`, (request, response) => { return createAddressFactory().handle(request, response) } )
+router.get(`/api/v1/addresses`, (request, response) => { return findAllAddressesFactory().handle(request, response) } )
+router.get(`/api/v1/addresses/:id`, (request, response) => { return findByIdAddressFactory().handle(request, response) } )
+router.get(`/api/v1/addresses/userById/:id_user`, (request, response) => { return findByIdUserAddressFactory().handle(request, response) } )
+router.put(`/api/v1/addresses/:id`, (request, response) => { return updateAddressFactory().handle(request, response) } )
+router.delete(`/api/v1/addresses/:id`, (request, response) => { return deleteAddressFactory().handle(request, response) } )
 
 
 export { router }
