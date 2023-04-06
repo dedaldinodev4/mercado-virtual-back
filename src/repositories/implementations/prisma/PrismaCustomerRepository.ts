@@ -16,10 +16,10 @@ export class PrismaCustomerRepository implements ICustomerRepository {
   }
 
 
-  async findByName(name: string): Promise<ICustomer | null> {
+  async findByIdentity(identity: string): Promise<ICustomer | null> {
     const customer = await this.repository.customer.findFirst(
       {
-        where: { firstName: name }
+        where: { identity }
       });
     return customer;
   }

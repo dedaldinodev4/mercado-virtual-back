@@ -1,7 +1,7 @@
 import { ICustomer, ICustomerRequest, ICustomerUpdateRequest} from '../dtos/Customer'
 
 export interface ICustomerRepository {
-  findByName(name: string): Promise<ICustomer | null>;
+  findByIdentity(identity: string): Promise<ICustomer | null>;
   findById(id: string): Promise<ICustomer | null>;
   findByIdUser(id: string): Promise<ICustomer | null>;
   findAll(): Promise<ICustomer[]>;

@@ -11,8 +11,8 @@ export class UpdateAddressUseCase {
     async execute(id: string, data: IUpdateAddressRequest): Promise<IUpdateAddress | Error> {
         const addressExists = await this.addressRepository.findById(id);
 
-        if (addressExists) {
-          throw new Error('address already exists.')
+        if (!addressExists) {
+          throw new Error('address does not exists.')
         }
         const result = await this.addressRepository.update(id, data);
 

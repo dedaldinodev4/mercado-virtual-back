@@ -37,6 +37,17 @@ import { updateAddressFactory } from "../usecases/Address/UpdateAddress/UpdateAd
 import { deleteAddressFactory } from "../usecases/Address/DeleteAddress/DeleteAddressFactory";
 import { findByIdUserAddressFactory } from "../usecases/Address/FindByIdUserAddress/FindByIdUserAddressFactory";
 
+//* Customers *//
+import { createCustomerFactory } from "../usecases/Customer/CreateCustomer/CreateCustomerFactory";
+import { findAllCustomersFactory } from "../usecases/Customer/FindAllCustomers/FindAllCustomersFactory";
+import { findByIdCustomerFactory } from "../usecases/Customer/FindByIdCustomer/FindByIdCustomerFactory";
+import { updateCustomerFactory } from "../usecases/Customer/UpdateCustomer/UpdateCustomerFactory";
+import { deleteCustomerFactory } from "../usecases/Customer/DeleteCustomer/DeleteCustomerFactory";
+import { findByIdUserCustomerFactory } from "../usecases/Customer/FindByIdUserCustomer/FindByIdUserCustomerFactory";
+import { findByIdentityCustomerFactory } from "../usecases/Customer/FindByIdentityCustomer/FindByIdentityCustomerFactory";
+import { findByCustomerTypeFactory } from "../usecases/Customer/FindByCustomerType/FindByCustomerTypeFactory";
+
+
 const router = Router();
 
 //* Auth Routes *//
@@ -68,13 +79,23 @@ router.get(`/api/v1/discounts/:id`, (request, response) => { return findByIdDisc
 router.put(`/api/v1/discounts/:id`, (request, response) => { return updateDiscountFactory().handle(request, response) } )
 router.delete(`/api/v1/discounts/:id`, (request, response) => { return deleteDiscountFactory().handle(request, response) } )
 
-//* Addresses Routes*//
+//* Addresses Routes *//
 router.post(`/api/v1/addresses`, (request, response) => { return createAddressFactory().handle(request, response) } )
 router.get(`/api/v1/addresses`, (request, response) => { return findAllAddressesFactory().handle(request, response) } )
 router.get(`/api/v1/addresses/:id`, (request, response) => { return findByIdAddressFactory().handle(request, response) } )
 router.get(`/api/v1/addresses/userById/:id_user`, (request, response) => { return findByIdUserAddressFactory().handle(request, response) } )
 router.put(`/api/v1/addresses/:id`, (request, response) => { return updateAddressFactory().handle(request, response) } )
 router.delete(`/api/v1/addresses/:id`, (request, response) => { return deleteAddressFactory().handle(request, response) } )
+
+//* Customers Routes *//
+router.post(`/api/v1/customers`, (request, response) => { return createCustomerFactory().handle(request, response) } )
+router.get(`/api/v1/customers`, (request, response) => { return findAllCustomersFactory().handle(request, response) } )
+router.get(`/api/v1/customers/:id`, (request, response) => { return findByIdCustomerFactory().handle(request, response) } )
+router.get(`/api/v1/customers/userById/:id_user`, (request, response) => { return findByIdUserCustomerFactory().handle(request, response) } )
+router.get(`/api/v1/customers/byIdentity/:identity`, (request, response) => { return findByIdentityCustomerFactory().handle(request, response) } )
+router.get(`/api/v1/customers/byType/:id_customerType`, (request, response) => { return findByCustomerTypeFactory().handle(request, response) } )
+router.put(`/api/v1/customers/:id`, (request, response) => { return updateCustomerFactory().handle(request, response) } )
+router.delete(`/api/v1/customers/:id`, (request, response) => { return deleteCustomerFactory().handle(request, response) } )
 
 
 export { router }

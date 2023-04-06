@@ -11,8 +11,8 @@ export class UpdateDiscountUseCase {
     async execute(id: string, data: IUpdateDiscountRequest): Promise<IUpdateDiscount | Error> {
         const discountExists = await this.discountRepository.findById(id);
 
-        if (discountExists) {
-          throw new Error('Discount already exists.')
+        if (!discountExists) {
+          throw new Error('Discount does not exists.')
         }
         const result = await this.discountRepository.update(id, data);
 

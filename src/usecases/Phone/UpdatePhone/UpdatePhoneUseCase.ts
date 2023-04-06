@@ -11,8 +11,8 @@ export class UpdatePhoneUseCase {
     async execute(id: string, data: IUpdatePhoneRequest): Promise<IUpdatePhone | Error> {
         const phoneExists = await this.phoneRepository.findById(id);
 
-        if (phoneExists) {
-          throw new Error('Phone number already exists.')
+        if (!phoneExists) {
+          throw new Error('Phone number does not exists.')
         }
         const result = await this.phoneRepository.update(id, data);
 

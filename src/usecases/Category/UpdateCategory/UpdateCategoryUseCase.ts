@@ -11,8 +11,8 @@ export class UpdateCategoryUseCase {
     async execute(id: string, data: IUpdateCategoryRequest): Promise<IUpdateCategory | Error> {
         const categoryExists = await this.categoryRepository.findById(id);
 
-        if (categoryExists) {
-          throw new Error('Category already exists.')
+        if (!categoryExists) {
+          throw new Error('Category does not exists.')
         }
         const result = await this.categoryRepository.update(id, data);
 
