@@ -47,6 +47,22 @@ import { findByIdUserCustomerFactory } from "../usecases/Customer/FindByIdUserCu
 import { findByIdentityCustomerFactory } from "../usecases/Customer/FindByIdentityCustomer/FindByIdentityCustomerFactory";
 import { findByCustomerTypeFactory } from "../usecases/Customer/FindByCustomerType/FindByCustomerTypeFactory";
 
+//* CustomerTypes *//
+import { createCustomerTypeFactory } from "../usecases/CustomerType/CreateCustomerType/CreateCustomerTypeFactory";
+import { findAllCustomerTypesFactory } from "../usecases/CustomerType/FindAllCustomerTypes/FindAllCustomerTypesFactory";
+import { findByIdCustomerTypeFactory } from "../usecases/CustomerType/FindByIdCustomerType/FindByIdCustomerTypeFactory";
+import { findByNameCustomerTypeFactory } from "../usecases/CustomerType/FindByNameCustomerType/FindByNameCustomerTypeFactory";
+import { updateCustomerTypeFactory } from "../usecases/CustomerType/UpdateCustomerType/UpdateCustomerTypeFactory";
+import { deleteCustomerTypeFactory } from "../usecases/CustomerType/DeleteCustomerType/DeleteCustomerTypeFactory";
+
+//* Carts *//
+import { createCartFactory } from "../usecases/Cart/CreateCart/CreateCartFactory";
+import { findAllCartsFactory } from "../usecases/Cart/FindAllCarts/FindAllCartsFactory";
+import { findByIdCartFactory } from "../usecases/Cart/FindByIdCart/FindByIdCartFactory";
+import { findByStatusCartFactory } from "../usecases/Cart/FindByStatusCart/FindByStatusCartFactory";
+import { updateCartFactory } from "../usecases/Cart/UpdateCart/UpdateCartFactory";
+import { deleteCartFactory } from "../usecases/Cart/DeleteCart/DeleteCartFactory";
+
 
 const router = Router();
 
@@ -96,6 +112,22 @@ router.get(`/api/v1/customers/byIdentity/:identity`, (request, response) => { re
 router.get(`/api/v1/customers/byType/:id_customerType`, (request, response) => { return findByCustomerTypeFactory().handle(request, response) } )
 router.put(`/api/v1/customers/:id`, (request, response) => { return updateCustomerFactory().handle(request, response) } )
 router.delete(`/api/v1/customers/:id`, (request, response) => { return deleteCustomerFactory().handle(request, response) } )
+
+//* CustomerTypes Routes *//
+router.post(`/api/v1/customer_types`, (request, response) => { return createCustomerTypeFactory().handle(request, response) } )
+router.get(`/api/v1/customer_types`, (request, response) => { return findAllCustomerTypesFactory().handle(request, response) } )
+router.get(`/api/v1/customer_types/:id`, (request, response) => { return findByIdCustomerTypeFactory().handle(request, response) } )
+router.get(`/api/v1/customer_types/ByName/:name`, (request, response) => { return findByNameCustomerTypeFactory().handle(request, response) } )
+router.put(`/api/v1/customer_types/:id`, (request, response) => { return updateCustomerTypeFactory().handle(request, response) } )
+router.delete(`/api/v1/customer_types/:id`, (request, response) => { return deleteCustomerTypeFactory().handle(request, response) } )
+
+//* Carts Routes *//
+router.post(`/api/v1/carts`, (request, response) => { return createCartFactory().handle(request, response) } )
+router.get(`/api/v1/carts`, (request, response) => { return findAllCartsFactory().handle(request, response) } )
+router.get(`/api/v1/carts/:id`, (request, response) => { return findByIdCartFactory().handle(request, response) } )
+router.get(`/api/v1/carts/ByStatus/:status`, (request, response) => { return findByStatusCartFactory().handle(request, response) } )
+router.put(`/api/v1/carts/:id`, (request, response) => { return updateCartFactory().handle(request, response) } )
+router.delete(`/api/v1/carts/:id`, (request, response) => { return deleteCartFactory().handle(request, response) } )
 
 
 export { router }
