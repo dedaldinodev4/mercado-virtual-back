@@ -63,6 +63,24 @@ import { findByStatusCartFactory } from "../usecases/Cart/FindByStatusCart/FindB
 import { updateCartFactory } from "../usecases/Cart/UpdateCart/UpdateCartFactory";
 import { deleteCartFactory } from "../usecases/Cart/DeleteCart/DeleteCartFactory";
 
+//* Develies *//
+import { createDevelyFactory } from "../usecases/Devely/CreateDevely/CreateDevelyFactory";
+import { findAllDeveliesFactory } from "../usecases/Devely/FindAllDevelies/FindAllDeveliesFactory";
+import { findByIdDevelyFactory } from "../usecases/Devely/FindByIdDevely/FindByIdDevelyFactory";
+import { findByOrderDevelyFactory } from "../usecases/Devely/FindByOrderDevely/FindByOrderDevelyFactory";
+import { findByStatusDevelyFactory } from "../usecases/Devely/FindByStatusDevely/FindByStatusDevelyFactory";
+import { updateDevelyFactory } from "../usecases/Devely/UpdateDevely/UpdateDevelyFactory";
+import { deleteDevelyFactory } from "../usecases/Devely/DeleteDevely/DeleteDevelyFactory";
+
+//* Orders *//
+import { createOrderFactory } from "../usecases/Order/CreateOrder/CreateOrderFactory";
+import { findAllOrdersFactory } from "../usecases/Order/FindAllOrders/FindAllOrdersFactory";
+import { findByIdOrderFactory } from "../usecases/Order/FindByIdOrder/FindByIdOrderFactory";
+import { findByTokenOrderFactory } from "../usecases/Order/FindByTokenOrder/FindByTokenOrderFactory";
+import { findByCustomerOrderFactory } from "../usecases/Order/FindByCustomerOrder/FindByCustomerOrderFactory";
+import { updateOrderFactory } from "../usecases/Order/UpdateOrder/UpdateOrderFactory";
+import { deleteOrderFactory } from "../usecases/Order/DeleteOrder/DeleteOrderFactory";
+
 
 const router = Router();
 
@@ -128,6 +146,24 @@ router.get(`/api/v1/carts/:id`, (request, response) => { return findByIdCartFact
 router.get(`/api/v1/carts/ByStatus/:status`, (request, response) => { return findByStatusCartFactory().handle(request, response) } )
 router.put(`/api/v1/carts/:id`, (request, response) => { return updateCartFactory().handle(request, response) } )
 router.delete(`/api/v1/carts/:id`, (request, response) => { return deleteCartFactory().handle(request, response) } )
+
+//* Develies Routes *//
+router.post(`/api/v1/develies`, (request, response) => { return createDevelyFactory().handle(request, response) } )
+router.get(`/api/v1/develies`, (request, response) => { return findAllDeveliesFactory().handle(request, response) } )
+router.get(`/api/v1/develies/:id`, (request, response) => { return findByIdDevelyFactory().handle(request, response) } )
+router.get(`/api/v1/develies/ByOrder/:id_order`, (request, response) => { return findByOrderDevelyFactory().handle(request, response) } )
+router.get(`/api/v1/develies/ByStatus/:status`, (request, response) => { return findByStatusDevelyFactory().handle(request, response) } )
+router.put(`/api/v1/develies/:id`, (request, response) => { return updateDevelyFactory().handle(request, response) } )
+router.delete(`/api/v1/develies/:id`, (request, response) => { return deleteDevelyFactory().handle(request, response) } )
+
+//* Orders Routes *//
+router.post(`/api/v1/develies`, (request, response) => { return createOrderFactory().handle(request, response) } )
+router.get(`/api/v1/develies`, (request, response) => { return findAllOrdersFactory().handle(request, response) } )
+router.get(`/api/v1/develies/:id`, (request, response) => { return findByIdOrderFactory().handle(request, response) } )
+router.get(`/api/v1/develies/ByToken/:token`, (request, response) => { return findByTokenOrderFactory().handle(request, response) } )
+router.get(`/api/v1/develies/ByCustomer/:id_customer`, (request, response) => { return findByCustomerOrderFactory().handle(request, response) } )
+router.put(`/api/v1/develies/:id`, (request, response) => { return updateOrderFactory().handle(request, response) } )
+router.delete(`/api/v1/develies/:id`, (request, response) => { return deleteOrderFactory().handle(request, response) } )
 
 
 export { router }
