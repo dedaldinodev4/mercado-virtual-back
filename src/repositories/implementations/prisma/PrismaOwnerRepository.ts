@@ -16,10 +16,10 @@ export class PrismaOwnerRepository implements IOwnerRepository {
   }
 
 
-  async findByName(name: string): Promise<IOwner | null> {
+  async findByIdentity(identity: string): Promise<IOwner | null> {
     const owner = await this.repository.owner.findFirst(
       {
-        where: { firstName: name }
+        where: { identity }
       });
     return owner;
   }

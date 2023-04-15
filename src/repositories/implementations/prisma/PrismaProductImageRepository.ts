@@ -3,7 +3,7 @@ import { IProductImage, IProductImageRequest } from "../../../dtos/ProductImage"
 import { IProductImageRepository } from "../../IProductImageRepository";
 
 
-export class PrismaProductShopRepository implements IProductImageRepository {
+export class PrismaProductImageRepository implements IProductImageRepository {
   private repository = prismaClient;
 
   async findById(id: string): Promise<IProductImage | null> {

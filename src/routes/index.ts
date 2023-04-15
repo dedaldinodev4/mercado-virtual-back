@@ -81,6 +81,71 @@ import { findByCustomerOrderFactory } from "../usecases/Order/FindByCustomerOrde
 import { updateOrderFactory } from "../usecases/Order/UpdateOrder/UpdateOrderFactory";
 import { deleteOrderFactory } from "../usecases/Order/DeleteOrder/DeleteOrderFactory";
 
+//* Owners *//
+import { createOwnerFactory } from "../usecases/Owner/CreateOwner/CreateOwnerFactory";
+import { findAllOwnersFactory } from "../usecases/Owner/FindAllOwners/FindAllOwnersFactory";
+import { findByIdOwnerFactory } from "../usecases/Owner/FindByIdOwner/FindByIdOwnerFactory";
+import { updateOwnerFactory } from "../usecases/Owner/UpdateOwner/UpdateOwnerFactory";
+import { deleteOwnerFactory } from "../usecases/Owner/DeleteOwner/DeleteOwnerFactory";
+import { findByIdUserOwnerFactory } from "../usecases/Owner/FindByIdUserOwner/FindByIdUserOwnerFactory";
+import { findByIdentityOwnerFactory } from "../usecases/Owner/FindByIdentityOwner/FindByIdentityOwnerFactory";
+
+//* Payments *//
+import { createPaymentFactory } from "../usecases/Payment/CreatePayment/CreatePaymentFactory";
+import { findAllPaymentsFactory } from "../usecases/Payment/FindAllPayments/FindAllPaymentsFactory";
+import { findByIdPaymentFactory } from "../usecases/Payment/FindByIdPayment/FindByIdPaymentFactory";
+import { findByOrderPaymentFactory } from "../usecases/Payment/FindByOrderPayment/FindByOrderPaymentFactory";
+import { updatePaymentFactory } from "../usecases/Payment/UpdatePayment/UpdatePaymentFactory";
+import { deletePaymentFactory } from "../usecases/Payment/DeletePayment/DeletePaymentFactory";
+
+//* PaymentTypes *//
+import { createPaymentTypeFactory } from "../usecases/PaymentType/CreatePaymentType/CreatePaymentTypeFactory";
+import { findAllPaymentTypesFactory } from "../usecases/PaymentType/FindAllPaymentTypes/FindAllPaymentTypesFactory";
+import { findByIdPaymentTypeFactory } from "../usecases/PaymentType/FindByIdPaymentType/FindByIdPaymentTypeFactory";
+import { findByNamePaymentTypeFactory } from "../usecases/PaymentType/FindByNamePaymentType/FindByNamePaymentTypeFactory";
+import { updatePaymentTypeFactory } from "../usecases/PaymentType/UpdatePaymentType/UpdatePaymentTypeFactory";
+import { deletePaymentTypeFactory } from "../usecases/PaymentType/DeletePaymentType/DeletePaymentTypeFactory";
+
+//* Products *//
+import { createProductFactory } from "../usecases/Product/CreateProduct/CreateProductFactory";
+import { findAllProductsFactory } from "../usecases/Product/FindAllProducts/FindAllProductsFactory";
+import { findByIdProductFactory } from "../usecases/Product/FindByIdProduct/FindByIdProductFactory";
+import { findByCategoryProductFactory } from "../usecases/Product/FindByCategoryProduct/FindByCategoryProductFactory";
+import { updateProductFactory } from "../usecases/Product/UpdateProduct/UpdateProductFactory";
+import { deleteProductFactory } from "../usecases/Product/DeleteProduct/DeleteProductFactory";
+
+//* ProductImges *//
+import { createProductImageFactory } from "../usecases/ProductImage/CreateProductImage/CreateProductImageFactory";
+import { findAllProductImagesFactory } from "../usecases/ProductImage/FindAllProductImages/FindAllProductImagesFactory";
+import { findByIdProductImageFactory } from "../usecases/ProductImage/FindByIdProductImage/FindByIdProductImageFactory";
+import { findByProductImagesFactory } from "../usecases/ProductImage/FindByProductImages/FindByProductImagesFactory";
+import { updateProductImageFactory } from "../usecases/ProductImage/UpdateProductImage/UpdateProductImageFactory";
+import { deleteProductImageFactory } from "../usecases/ProductImage/DeleteProductImage/DeleteProductImageFactory";
+
+//* Shopies *//
+import { createShopFactory } from "../usecases/Shop/CreateShop/CreateShopFactory";
+import { findAllShopiesFactory } from "../usecases/Shop/FindAllShopies/FindAllShopiesFactory";
+import { findByIdShopFactory } from "../usecases/Shop/FindByIdShop/FindByIdShopFactory";
+import { findByOwnerShopFactory } from "../usecases/Shop/FindByOwnerShop/FindByOwnerShopFactory";
+import { findByAddressShopFactory } from "../usecases/Shop/FindByAddressShop/FindByAddressShopFactory";
+import { updateShopFactory } from "../usecases/Shop/UpdateShop/UpdateShopFactory";
+import { deleteShopFactory } from "../usecases/Shop/DeleteShop/DeleteShopFactory";
+
+//* ProductShopies *//
+import { createProductShopFactory } from "../usecases/ProductShop/CreateProductShop/CreateProductShopFactory";
+import { findAllProductShopiesFactory } from "../usecases/ProductShop/FindAllProductShopies/FindAllProductShopiesFactory";
+import { findByIdProductShopFactory } from "../usecases/ProductShop/FindByIdProductShop/FindByIdProductShopFactory";
+import { findByShopProductShopFactory } from "../usecases/ProductShop/FindByShopProductShop/FindByShopProductShopFactory";
+import { updateProductShopFactory } from "../usecases/ProductShop/UpdateProductShop/UpdateProductShopFactory";
+import { deleteProductShopFactory } from "../usecases/ProductShop/DeleteProductShop/DeleteProductShopFactory";
+
+//* ProductShopOrders *//
+import { createProductShopOrderFactory } from "../usecases/ProductShopOrder/CreateProductShopOrder/CreateProductShopOrderFactory";
+import { findAllProductShopOrdersFactory } from "../usecases/ProductShopOrder/FindAllProductShopOrders/FindAllProductShopOrdersFactory";
+import { findByIdProductShopOrderFactory } from "../usecases/ProductShopOrder/FindByIdProductShopOrder/FindByIdProductShopOrderFactory";
+import { findByOrderProductShopOrderFactory } from "../usecases/ProductShopOrder/FindByOrderProductShopOrder/FindByOrderProductOrderFactory";
+import { updateProductShopOrderFactory } from "../usecases/ProductShopOrder/UpdateProductShopOrder/UpdateProductShopOrderFactory";
+import { deleteProductShopOrderFactory } from "../usecases/ProductShopOrder/DeleteProductShopOrder/DeleteProductShopOrderFactory";
 
 const router = Router();
 
@@ -157,13 +222,78 @@ router.put(`/api/v1/develies/:id`, (request, response) => { return updateDevelyF
 router.delete(`/api/v1/develies/:id`, (request, response) => { return deleteDevelyFactory().handle(request, response) } )
 
 //* Orders Routes *//
-router.post(`/api/v1/develies`, (request, response) => { return createOrderFactory().handle(request, response) } )
-router.get(`/api/v1/develies`, (request, response) => { return findAllOrdersFactory().handle(request, response) } )
-router.get(`/api/v1/develies/:id`, (request, response) => { return findByIdOrderFactory().handle(request, response) } )
-router.get(`/api/v1/develies/ByToken/:token`, (request, response) => { return findByTokenOrderFactory().handle(request, response) } )
-router.get(`/api/v1/develies/ByCustomer/:id_customer`, (request, response) => { return findByCustomerOrderFactory().handle(request, response) } )
-router.put(`/api/v1/develies/:id`, (request, response) => { return updateOrderFactory().handle(request, response) } )
-router.delete(`/api/v1/develies/:id`, (request, response) => { return deleteOrderFactory().handle(request, response) } )
+router.post(`/api/v1/orders`, (request, response) => { return createOrderFactory().handle(request, response) } )
+router.get(`/api/v1/orders`, (request, response) => { return findAllOrdersFactory().handle(request, response) } )
+router.get(`/api/v1/orders/:id`, (request, response) => { return findByIdOrderFactory().handle(request, response) } )
+router.get(`/api/v1/orders/ByToken/:token`, (request, response) => { return findByTokenOrderFactory().handle(request, response) } )
+router.get(`/api/v1/orders/ByCustomer/:id_customer`, (request, response) => { return findByCustomerOrderFactory().handle(request, response) } )
+router.put(`/api/v1/orders/:id`, (request, response) => { return updateOrderFactory().handle(request, response) } )
+router.delete(`/api/v1/orders/:id`, (request, response) => { return deleteOrderFactory().handle(request, response) } )
 
+//* Owners Routes *//
+router.post(`/api/v1/owners`, (request, response) => { return createOwnerFactory().handle(request, response) } )
+router.get(`/api/v1/owners`, (request, response) => { return findAllOwnersFactory().handle(request, response) } )
+router.get(`/api/v1/owners/:id`, (request, response) => { return findByIdOwnerFactory().handle(request, response) } )
+router.get(`/api/v1/owners/userById/:id_user`, (request, response) => { return findByIdUserOwnerFactory().handle(request, response) } )
+router.get(`/api/v1/owners/byIdentity/:identity`, (request, response) => { return findByIdentityOwnerFactory().handle(request, response) } )
+router.put(`/api/v1/owners/:id`, (request, response) => { return updateOwnerFactory().handle(request, response) } )
+router.delete(`/api/v1/owners/:id`, (request, response) => { return deleteOwnerFactory().handle(request, response) } )
+
+//* Payments Routes *//
+router.post(`/api/v1/payments`, (request, response) => { return createPaymentFactory().handle(request, response) } )
+router.get(`/api/v1/payments`, (request, response) => { return findAllPaymentsFactory().handle(request, response) } )
+router.get(`/api/v1/payments/:id`, (request, response) => { return findByIdPaymentFactory().handle(request, response) } )
+router.get(`/api/v1/payments/ByOrder/:id_order`, (request, response) => { return findByOrderPaymentFactory().handle(request, response) } )
+router.put(`/api/v1/payments/:id`, (request, response) => { return updatePaymentFactory().handle(request, response) } )
+router.delete(`/api/v1/payments/:id`, (request, response) => { return deletePaymentFactory().handle(request, response) } )
+
+//* PaymentTypes Routes *//
+router.post(`/api/v1/payment_types`, (request, response) => { return createPaymentTypeFactory().handle(request, response) } )
+router.get(`/api/v1/payment_types`, (request, response) => { return findAllPaymentTypesFactory().handle(request, response) } )
+router.get(`/api/v1/payment_types/:id`, (request, response) => { return findByIdPaymentTypeFactory().handle(request, response) } )
+router.get(`/api/v1/payment_types/ByName/:name`, (request, response) => { return findByNamePaymentTypeFactory().handle(request, response) } )
+router.put(`/api/v1/payment_types/:id`, (request, response) => { return updatePaymentTypeFactory().handle(request, response) } )
+router.delete(`/api/v1/payment_types/:id`, (request, response) => { return deletePaymentTypeFactory().handle(request, response) } )
+
+//* Products Routes *//
+router.post(`/api/v1/products`, (request, response) => { return createProductFactory().handle(request, response) } )
+router.get(`/api/v1/products`, (request, response) => { return findAllProductsFactory().handle(request, response) } )
+router.get(`/api/v1/products/:id`, (request, response) => { return findByIdProductFactory().handle(request, response) } )
+router.get(`/api/v1/products/ByCategory/:id_category`, (request, response) => { return findByCategoryProductFactory().handle(request, response) } )
+router.put(`/api/v1/products/:id`, (request, response) => { return updateProductFactory().handle(request, response) } )
+router.delete(`/api/v1/products/:id`, (request, response) => { return deleteProductFactory().handle(request, response) } )
+
+//* ProductImages Routes *//
+router.post(`/api/v1/product_images`, (request, response) => { return createProductImageFactory().handle(request, response) } )
+router.get(`/api/v1/product_images`, (request, response) => { return findAllProductImagesFactory().handle(request, response) } )
+router.get(`/api/v1/product_images/:id`, (request, response) => { return findByIdProductImageFactory().handle(request, response) } )
+router.get(`/api/v1/product_images/ByProduct/:id_product`, (request, response) => { return findByProductImagesFactory().handle(request, response) } )
+router.put(`/api/v1/product_images/:id`, (request, response) => { return updateProductImageFactory().handle(request, response) } )
+router.delete(`/api/v1/product_images/:id`, (request, response) => { return deleteProductImageFactory().handle(request, response) } )
+
+//* Shopies Routes *//
+router.post(`/api/v1/shopies`, (request, response) => { return createShopFactory().handle(request, response) } )
+router.get(`/api/v1/shopies`, (request, response) => { return findAllShopiesFactory().handle(request, response) } )
+router.get(`/api/v1/shopies/:id`, (request, response) => { return findByIdShopFactory().handle(request, response) } )
+router.get(`/api/v1/shopies/ByOwner/:id_owner`, (request, response) => { return findByOwnerShopFactory().handle(request, response) } )
+router.get(`/api/v1/shopies/ByAddress/:id_address`, (request, response) => { return findByAddressShopFactory().handle(request, response) } )
+router.put(`/api/v1/shopies/:id`, (request, response) => { return updateShopFactory().handle(request, response) } )
+router.delete(`/api/v1/shopies/:id`, (request, response) => { return deleteShopFactory().handle(request, response) } )
+
+//* ProductShopies Routes *//
+router.post(`/api/v1/product_shopies`, (request, response) => { return createProductShopFactory().handle(request, response) } )
+router.get(`/api/v1/product_shopies`, (request, response) => { return findAllProductShopiesFactory().handle(request, response) } )
+router.get(`/api/v1/product_shopies/:id`, (request, response) => { return findByIdProductShopFactory().handle(request, response) } )
+router.get(`/api/v1/product_shopies/ByShop/:id_shop`, (request, response) => { return findByShopProductShopFactory().handle(request, response) } )
+router.put(`/api/v1/product_shopies/:id`, (request, response) => { return updateProductShopFactory().handle(request, response) } )
+router.delete(`/api/v1/product_shopies/:id`, (request, response) => { return deleteProductShopFactory().handle(request, response) } )
+
+//* ProductShopOrders Routes *//
+router.post(`/api/v1/productShop_orders`, (request, response) => { return createProductShopOrderFactory().handle(request, response) } )
+router.get(`/api/v1/productShop_orders`, (request, response) => { return findAllProductShopOrdersFactory().handle(request, response) } )
+router.get(`/api/v1/productShop_orders/:id`, (request, response) => { return findByIdProductShopOrderFactory().handle(request, response) } )
+router.get(`/api/v1/productShop_orders/ByOrder/:id_order`, (request, response) => { return findByOrderProductShopOrderFactory().handle(request, response) } )
+router.put(`/api/v1/productShop_orders/:id`, (request, response) => { return updateProductShopOrderFactory().handle(request, response) } )
+router.delete(`/api/v1/productShop_orders/:id`, (request, response) => { return deleteProductShopOrderFactory().handle(request, response) } )
 
 export { router }

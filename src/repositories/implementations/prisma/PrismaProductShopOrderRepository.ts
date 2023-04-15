@@ -3,7 +3,7 @@ import { IProductShopOrder, IProductShopOrderRequest } from "../../../dtos/Produ
 import { IProductShopOrderRepository } from "../../IProductShopOrderRepository";
 
 
-export class PrismaProductShopRepository implements IProductShopOrderRepository {
+export class PrismaProductShopOrderRepository implements IProductShopOrderRepository {
   private repository = prismaClient;
 
   async findById(id: string): Promise<IProductShopOrder | null> {
