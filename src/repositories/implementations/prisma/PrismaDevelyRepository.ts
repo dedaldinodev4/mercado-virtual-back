@@ -4,53 +4,53 @@ import { IDevelyRepository } from "../../IDevelyRepository";
 
 
 export class PrismaDevelyRepository implements IDevelyRepository {
-  private repository = prismaClient;
+  private repository = prismaClient.delivy;
 
   async findByLocation(location: string): Promise<IDevely | null> {
-    const devely = await this.repository.delivy.findFirst(
+    const devely = await this.repository.findFirst(
       {
         where: { location }
       });
-    return devely;
+    return devely ?? null;
   }
 
   async findById(id: string): Promise<IDevely | null> {
-    const devely = await this.repository.delivy.findFirst(
+    const devely = await this.repository.findFirst(
       {
         where: { id }
       });
-      return devely
+      return devely ?? null;
   }
 
 
   async findAll(): Promise<IDevely[]> {
-    const develies = await this.repository.delivy.findMany({});
-    return develies;
+    const develies = await this.repository.findMany({});
+    return develies ?? [];
   }
 
   async findByStatus(status: string): Promise<IDevely[]> {
-    const develies = await this.repository.delivy.findMany({
+    const develies = await this.repository.findMany({
       where: { status }
     });
-    return develies;
+    return develies ?? [];
   }
 
   async findByOrder(id_order: string): Promise<IDevely | null> {
-    const devely = await this.repository.delivy.findFirst({
+    const devely = await this.repository.findFirst({
       where: { id_order }
     });
-    return devely;
+    return devely ?? null;
   }
 
   async create(data: IDevelyRequest): Promise<IDevely> {
-    const newDevely = await this.repository.delivy.create({
+    const newDevely = await this.repository.create({
       data
     })
     return newDevely;
   }
 
   async update(id: string, devely: IDevelyUpdateRequest): Promise<IDevely> {
-    const develyUpdate = await this.repository.delivy.update({
+    const develyUpdate = await this.repository.update({
       data: devely,
       where: { id }
     })
@@ -58,7 +58,7 @@ export class PrismaDevelyRepository implements IDevelyRepository {
   }
 
   async delete(id: string): Promise<void> {
-    const develyDelete = await this.repository.delivy.delete({
+    const develyDelete = await this.repository.delete({
       where: {
         id
       }

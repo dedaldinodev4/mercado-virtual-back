@@ -1,48 +1,82 @@
 import { prismaClient } from "../../../utils/prismaClient";
-import { IUser, IUserRequest } from "../../../dtos/User";
+import { IUser, IUserCredentialsRequest, IUserCredentialsResponse, IUserRequest } from "../../../dtos/User";
 import { IUserRepository } from "../../IUserRepository";
-
+import { hashPassword } from '../../../utils/auth';
+import { serializeUser } from '../../../utils/user';
 
 export class PrismaUserRepository implements IUserRepository {
-    private repository = prismaClient;
+  private repository = prismaClient.user;
 
+  async findById(id: string): Promise<IUser | null> {
+    const user = await this.repository.findFirst(
+      {
+        where: { id }
+    });
 
-    async findById(id: string): Promise<IUser | null> {
-        const user = await this.repository.user.findFirst(
-          { where: { id }
-        });
-        return user;
+    if (user) {
+      const response = serializeUser(user)
+      return response;
     }
 
-    async findByEmail(email: string): Promise<IUser | Error> {
-        const user = await this.repository.user.findFirst(
-          { where: { email }
-        });
-        return user !!;
-    }
+    return null;
+  }
 
-    async findAll(): Promise<IUser[]> {
-      const users = await this.repository.user.findMany({});
-      return users;
-    }
-     
-    async update(id: string, user: IUserRequest): Promise<IUser> {
-        const userUpdate = await this.repository.user.update({
-          data: user,
-          where: {
-            id
-          }
-        })
+  async findByEmail(email: string): Promise<IUser | null> {
+    const user = await this.repository.findFirst(
+      {
+        where: { email }
+      });
+      if (user) {
+        const response = serializeUser(user)
+        return response;
+      }
 
-        return userUpdate;
-    }
+      return null;
+  }
 
-    async delete(id: string): Promise<void> {
-        const userDelete = await this.repository.user.delete({
-          where: {
-            id
-          }
-        })
+  async findAll(): Promise<IUser[]> {
+    const users = await this.repository.findMany({});
+    const response = users.map((user) => {
+      return serializeUser(user)
+    })
+    return  response ?? [];
+  }
+
+  async update(id: string, user: IUserRequest): Promise<IUser> {
+    const userUpdate = await this.repository.update({
+      data: user,
+      where: {
+        id
+      }
+    })
+
+    return serializeUser(userUpdate);
+  }
+
+  async updateCredentials(id: string, credentials: IUserCredentialsRequest): Promise<IUserCredentialsResponse> {
+    const { password, email } = credentials;
+    const userUpdate = await this.repository.update({
+      data: {
+        email,
+        password: hashPassword(password)
+      },
+      where: {
+        id
+      }
+    })
+
+    return {
+      message: '',
+      user: { email: userUpdate.email}
     }
+  }
+
+  async delete(id: string): Promise<void> {
+    const userDelete = await this.repository.delete({
+      where: {
+        id
+      }
+    })
+  }
 
 }

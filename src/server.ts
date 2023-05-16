@@ -1,11 +1,13 @@
 import express from 'express'
 import morgan from 'morgan'
 import cors from 'cors'
+import path from 'path'
 
 import { ErrorInternal } from './helpers/ErrorInternal';
 import { router } from './routes';
 
 
+const imageDirectory = path.join(__dirname, '..', 'public', 'uploads');
 
 const server = express();
 
@@ -19,4 +21,4 @@ server.use(router)
 
 server.use(ErrorInternal)
 
-export { server }
+export { server, imageDirectory }

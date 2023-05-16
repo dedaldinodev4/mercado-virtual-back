@@ -7,5 +7,5 @@ export interface IProductRepository {
   findByCategory(category: string): Promise<IProduct[]>
   delete(id: string): Promise<void>;
   update(id: string, data: IProductUpdateRequest): Promise<IProduct | Error>;
-  create(data: IProductRequest): Promise<IProduct | Error>;
+  create(data: IProductRequest): Promise<IProduct>;
 }

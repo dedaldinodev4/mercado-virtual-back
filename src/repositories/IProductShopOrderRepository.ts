@@ -7,5 +7,5 @@ export interface IProductShopOrderRepository {
   findAll(): Promise<IProductShopOrder[]>;
   delete(id: string): Promise<void>;
   update(id: string, data: IProductShopOrderRequest): Promise<IProductShopOrder | Error>;
-  create(data: IProductShopOrderRequest): Promise<IProductShopOrder | Error>;
+  create(data: IProductShopOrderRequest): Promise<IProductShopOrder>;
 }

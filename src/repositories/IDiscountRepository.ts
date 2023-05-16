@@ -6,5 +6,5 @@ export interface IDiscountRepository {
   findAll(): Promise<IDiscount[]>;
   delete(id: string): Promise<void>;
   update(id: string, data: IDiscountRequest): Promise<IDiscount | Error>;
-  create(data: IDiscountRequest): Promise<IDiscount | Error>;
+  create(data: IDiscountRequest): Promise<IDiscount>;
 }

@@ -29,7 +29,7 @@ export class PrismaAuthRepository implements IAuthRepository {
           const token = jwt.sign(
             { user:  userCurrent }, 
             process.env.JWT_KEY ?? 'secret',
-            { expiresIn: "2h"}
+            { expiresIn: "12h"}
           );
 
           return {
@@ -66,7 +66,7 @@ export class PrismaAuthRepository implements IAuthRepository {
       const token = jwt.sign(
         { user:  userCurrent }, 
         process.env.JWT_KEY ?? 'secret',
-        { expiresIn: "2h"}
+        { expiresIn: "12h"}
       );
 
       return {

@@ -14,7 +14,7 @@ export class CreateCustomerController {
 
         try {
             const data = await this.createCustomerUseCase.execute({
-              firstName, lastName, dateBorn, 
+              firstName, lastName, dateBorn: new Date(dateBorn), 
               identity, id_customerType, id_user 
             });
 

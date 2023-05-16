@@ -4,40 +4,40 @@ import { IDiscountRepository } from "../../IDiscountRepository";
 
 
 export class PrismaDiscountRepository implements IDiscountRepository {
-  private repository = prismaClient;
+  private repository = prismaClient.discount;
 
 
   async findById(id: string): Promise<IDiscount | null> {
-    const discount = await this.repository.discount.findFirst(
+    const discount = await this.repository.findFirst(
       {
         where: { id }
       });
-    return discount;
+    return discount ?? null;
   }
 
 
   async findByName(name: string): Promise<IDiscount | null> {
-    const discount = await this.repository.discount.findFirst(
+    const discount = await this.repository.findFirst(
       {
         where: { name }
       });
-    return discount;
+    return discount ?? null;
   }
 
   async findAll(): Promise<IDiscount[]> {
-    const discounts = await this.repository.discount.findMany({});
-    return discounts;
+    const discounts = await this.repository.findMany({});
+    return discounts ?? [];
   }
 
   async create(data: IDiscountRequest): Promise<IDiscount> {
-    const newDiscount = await this.repository.discount.create({
+    const newDiscount = await this.repository.create({
       data
     })
     return newDiscount;
   }
 
   async update(id: string, discount: IDiscountRequest): Promise<IDiscount> {
-    const discountUpdate = await this.repository.discount.update({
+    const discountUpdate = await this.repository.update({
       data: discount,
       where: { id }
     })
@@ -45,7 +45,7 @@ export class PrismaDiscountRepository implements IDiscountRepository {
   }
 
   async delete(id: string): Promise<void> {
-    const discountDelete = await this.repository.discount.delete({
+    const discountDelete = await this.repository.delete({
       where: {
         id
       }

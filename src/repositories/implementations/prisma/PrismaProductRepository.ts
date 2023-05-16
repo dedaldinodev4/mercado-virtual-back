@@ -4,49 +4,49 @@ import { IProductRepository } from "../../IProductRepository";
 
 
 export class PrismaProductRepository implements IProductRepository {
-  private repository = prismaClient;
+  private repository = prismaClient.product;
 
 
   async findById(id: string): Promise<IProduct | null> {
-    const product = await this.repository.product.findFirst(
+    const product = await this.repository.findFirst(
       {
         where: { id }
       });
-    return product;
+    return product ?? null;
   }
 
 
   async findByName(name: string): Promise<IProduct | null> {
-    const product = await this.repository.product.findFirst(
+    const product = await this.repository.findFirst(
       {
         where: { name }
       });
-    return product;
+    return product ?? null;
   }
 
   async findAll(): Promise<IProduct[]> {
-    const products = await this.repository.product.findMany({});
-    return products;
+    const products = await this.repository.findMany({});
+    return products ?? [];
   }
 
   async findByCategory(id_category: string): Promise<IProduct[]> {
-    const products = await this.repository.product.findMany({
+    const products = await this.repository.findMany({
       where: {
         id_category
       }
     });
-    return products;
+    return products ?? [];
   }
 
   async create(data: IProductRequest): Promise<IProduct> {
-    const newProduct = await this.repository.product.create({
+    const newProduct = await this.repository.create({
       data
     })
     return newProduct;
   }
 
   async update(id: string, product: IProductUpdateRequest): Promise<IProduct> {
-    const productUpdate = await this.repository.product.update({
+    const productUpdate = await this.repository.update({
       data: product,
       where: { id }
     })
@@ -54,7 +54,7 @@ export class PrismaProductRepository implements IProductRepository {
   }
 
   async delete(id: string): Promise<void> {
-    const productDelete = await this.repository.product.delete({
+    const productDelete = await this.repository.delete({
       where: {
         id
       }

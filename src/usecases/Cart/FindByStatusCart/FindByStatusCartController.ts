@@ -8,10 +8,10 @@ export class FindByStatusCartController {
     ) { }
 
     async handle(request: Request, response: Response): Promise<Response> {
-        const { id } = request.params;
+        const { status } = request.params;
 
         try {
-            const data = await this.findByStatusCartUseCase.execute(id);
+            const data = await this.findByStatusCartUseCase.execute(status);
 
             return response.status(200).json(data);
         } catch (err: any) {

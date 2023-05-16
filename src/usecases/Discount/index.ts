@@ -1,0 +1,1 @@
+export { discountRoutes } from './routes'

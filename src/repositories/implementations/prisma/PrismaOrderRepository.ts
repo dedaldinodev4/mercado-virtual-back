@@ -4,46 +4,46 @@ import { IOrderRepository } from "../../IOrderRepository";
 
 
 export class PrismaOrderRepository implements IOrderRepository {
-  private repository = prismaClient;
+  private repository = prismaClient.order;
 
   async findByToken(token: string): Promise<IOrder | null> {
-    const order = await this.repository.order.findFirst(
+    const order = await this.repository.findFirst(
       {
         where: { token }
       });
-    return order;
+    return order ?? null;
   }
 
   async findById(id: string): Promise<IOrder | null> {
-    const order = await this.repository.order.findFirst(
+    const order = await this.repository.findFirst(
       {
         where: { id }
       });
-      return order
+      return order ?? null;
   }
 
 
   async findAll(): Promise<IOrder[]> {
-    const orders = await this.repository.order.findMany({});
-    return orders;
+    const orders = await this.repository.findMany({});
+    return orders ?? [];
   }
 
   async findByCustomer(id_customer: string): Promise<IOrder[]> {
-    const orders = await this.repository.order.findMany({
+    const orders = await this.repository.findMany({
       where: { id_customer }
     });
-    return orders;
+    return orders ?? [];
   }
 
   async create(data: IOrderRequest): Promise<IOrder> {
-    const newOrder = await this.repository.order.create({
+    const newOrder = await this.repository.create({
       data
     })
     return newOrder;
   }
 
   async update(id: string, order: IOrderUpdateRequest): Promise<IOrder> {
-    const orderUpdate = await this.repository.order.update({
+    const orderUpdate = await this.repository.update({
       data: order,
       where: { id }
     })
@@ -51,7 +51,7 @@ export class PrismaOrderRepository implements IOrderRepository {
   }
 
   async delete(id: string): Promise<void> {
-    const orderDelete = await this.repository.order.delete({
+    const orderDelete = await this.repository.delete({
       where: {
         id
       }

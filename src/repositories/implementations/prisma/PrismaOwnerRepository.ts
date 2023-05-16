@@ -4,50 +4,50 @@ import { IOwnerRepository } from "../../IOwnerRepository";
 
 
 export class PrismaOwnerRepository implements IOwnerRepository {
-  private repository = prismaClient;
+  private repository = prismaClient.owner;
 
 
   async findById(id: string): Promise<IOwner | null> {
-    const owner = await this.repository.owner.findFirst(
+    const owner = await this.repository.findFirst(
       {
         where: { id }
       });
-      return owner
+      return owner ?? null;
   }
 
 
   async findByIdentity(identity: string): Promise<IOwner | null> {
-    const owner = await this.repository.owner.findFirst(
+    const owner = await this.repository.findFirst(
       {
         where: { identity }
       });
-    return owner;
+    return owner ?? null;
   }
 
   async findAll(): Promise<IOwner[]> {
-    const owners = await this.repository.owner.findMany({});
-    return owners;
+    const owners = await this.repository.findMany({});
+    return owners ?? [];
   }
 
 
   async findByIdUser(id_user: string): Promise<IOwner | null> {
-    const owner = await this.repository.owner.findFirst({
+    const owner = await this.repository.findFirst({
       where: {
         id_user
       }
     });
-    return owner;
+    return owner ?? null;
   }
 
-  async create(data: IOwnerRequest): Promise<IOwner> {
-    const newOwner = await this.repository.owner.create({
-      data
+  async create(owner: IOwnerRequest): Promise<IOwner> {
+    const newOwner = await this.repository.create({
+      data: owner
     })
     return newOwner;
   }
 
   async update(id: string, owner: IOwnerUpdateRequest): Promise<IOwner> {
-    const ownerUpdate = await this.repository.owner.update({
+    const ownerUpdate = await this.repository.update({
       data: owner,
       where: { id }
     })
@@ -55,7 +55,7 @@ export class PrismaOwnerRepository implements IOwnerRepository {
   }
 
   async delete(id: string): Promise<void> {
-    const ownerDelete = await this.repository.owner.delete({
+    const ownerDelete = await this.repository.delete({
       where: {
         id
       }

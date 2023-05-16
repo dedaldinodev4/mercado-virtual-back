@@ -105,7 +105,7 @@ model Customer {
   id              String       @id @default(uuid())
   firstName       String
   lastName        String
-  identity        String
+  identity        String      @unique
   dateBorn        DateTime     @db.Date
   id_customerType String
   id_user         String
@@ -179,7 +179,7 @@ model Owner {
   id         String   @id @default(uuid())
   firstName  String
   lastName   String
-  identity   String
+  identity   String   @unique
   dateBorn   DateTime @db.Date
   id_user    String
   created_at DateTime @default(now())

@@ -8,5 +8,5 @@ export interface ICartRepository {
   findAll(): Promise<ICart[]>;
   delete(id: string): Promise<void>;
   update(id: string, data: ICartUpdateRequest): Promise<ICart | Error>;
-  create(data: ICartRequest): Promise<ICart | Error>;
+  create(data: ICartRequest): Promise<ICart>;
 }

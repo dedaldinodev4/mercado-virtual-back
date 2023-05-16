@@ -13,7 +13,7 @@ export class UpdateCustomerController {
 
         try {
             const data = await this.updateCustomerUseCase
-                .execute(id, { firstName, lastName, identity, dateBorn });
+                .execute(id, { firstName, lastName, identity, dateBorn: new Date(dateBorn) });
 
             return response.status(201).json(data);
         } catch(err: any) {

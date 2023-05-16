@@ -8,11 +8,12 @@ export class CreateProductImageController {
   ) { }
 
   async handle(request: Request, response: Response): Promise<Response> {
-    const { url, id_product } = request.body;
+    const { id_product } = request.params;
+    const image = request.file?.filename ?? '';
 
     try {
       const data = await this.createProductImageUseCase.execute({
-        url, id_product
+        url: image, id_product
       });
 
       return response.status(201).json(data);

@@ -8,10 +8,10 @@ export class FindByEmailUserController {
     ){}
 
     async handle(request: Request, response: Response): Promise<Response> {
-        const { id } = request.params;
+        const { email } = request.params;
 
         try {
-            const data = await this.findByEmailUserUseCase.execute(id);
+            const data = await this.findByEmailUserUseCase.execute(email);
 
             return response.status(200).json(data);
         } catch(err: any) {

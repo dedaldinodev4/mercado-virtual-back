@@ -7,5 +7,5 @@ export interface IOrderRepository {
   findAll(): Promise<IOrder[]>;
   delete(id: string): Promise<void>;
   update(id: string, data: IOrderUpdateRequest): Promise<IOrder | Error>;
-  create(data: IOrderRequest): Promise<IOrder | Error>;
+  create(data: IOrderRequest): Promise<IOrder>;
 }

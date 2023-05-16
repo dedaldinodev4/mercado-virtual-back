@@ -13,7 +13,7 @@ export class DeleteProductShopController {
         try {
             const data = await this.deleteProductShopUseCase.execute(id);
 
-            return response.status(204);
+            return response.status(204).end();
         } catch (err: any) {
             return response.status(400).json({
                 message: err?.message || 'Unexpected error.'

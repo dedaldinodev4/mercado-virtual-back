@@ -8,5 +8,5 @@ export interface IShopRepository {
   findAll(): Promise<IShop[]>;
   delete(id: string): Promise<void>;
   update(id: string, data: IShopUpdateRequest): Promise<IShop | Error>;
-  create(data: IShopRequest): Promise<IShop | Error>;
+  create(data: IShopRequest): Promise<IShop>;
 }

@@ -6,5 +6,5 @@ export interface ICategoryRepository {
   findAll(): Promise<ICategory[]>;
   delete(id: string): Promise<void>;
   update(id: string, data: ICategoryRequest): Promise<ICategory | Error>;
-  create(data: ICategoryRequest): Promise<ICategory | Error>;
+  create(data: ICategoryRequest): Promise<ICategory>;
 }

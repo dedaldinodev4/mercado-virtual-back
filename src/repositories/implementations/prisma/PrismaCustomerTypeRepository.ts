@@ -4,40 +4,40 @@ import { ICustomerTypeRepository } from "../../ICustomerTypeRepository";
 
 
 export class PrismaCustomerTypeRepository implements ICustomerTypeRepository {
-  private repository = prismaClient;
+  private repository = prismaClient.customerType;
 
 
   async findById(id: string): Promise<ICustomerType | null> {
-    const customerType = await this.repository.customerType.findFirst(
+    const customerType = await this.repository.findFirst(
       {
         where: { id }
       });
-      return customerType
+      return customerType ?? null;
   }
 
 
   async findByName(name: string): Promise<ICustomerType | null> {
-    const customerType = await this.repository.customerType.findFirst(
+    const customerType = await this.repository.findFirst(
       {
         where: { name }
       });
-    return customerType;
+    return customerType ?? null;
   }
 
   async findAll(): Promise<ICustomerType[]> {
-    const customerTypes = await this.repository.customerType.findMany({});
-    return customerTypes;
+    const customerTypes = await this.repository.findMany({});
+    return customerTypes ?? [];
   }
 
   async create(data: ICustomerTypeRequest): Promise<ICustomerType> {
-    const newCustomerType = await this.repository.customerType.create({
+    const newCustomerType = await this.repository.create({
       data
     })
     return newCustomerType;
   }
 
   async update(id: string, customerType: ICustomerTypeRequest): Promise<ICustomerType> {
-    const customerTypeUpdate = await this.repository.customerType.update({
+    const customerTypeUpdate = await this.repository.update({
       data: customerType,
       where: { id }
     })
@@ -45,7 +45,7 @@ export class PrismaCustomerTypeRepository implements ICustomerTypeRepository {
   }
 
   async delete(id: string): Promise<void> {
-    const customerTypeDelete = await this.repository.customerType.delete({
+    const customerTypeDelete = await this.repository.delete({
       where: {
         id
       }

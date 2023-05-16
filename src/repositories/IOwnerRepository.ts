@@ -7,5 +7,5 @@ export interface IOwnerRepository {
   findAll(): Promise<IOwner[]>;
   delete(id: string): Promise<void>;
   update(id: string, data: IOwnerUpdateRequest): Promise<IOwner | Error>;
-  create(data: IOwnerRequest): Promise<IOwner | Error>;
+  create(data: IOwnerRequest): Promise<IOwner>;
 }

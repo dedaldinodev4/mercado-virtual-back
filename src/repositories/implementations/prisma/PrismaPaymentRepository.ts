@@ -4,46 +4,46 @@ import { IPaymentRepository } from "../../IPaymentRepository";
 
 
 export class PrismaPaymentRepository implements IPaymentRepository {
-  private repository = prismaClient;
+  private repository = prismaClient.payment;
 
   async findByCode(code: string): Promise<IPayment | null> {
-    const payment = await this.repository.payment.findFirst(
+    const payment = await this.repository.findFirst(
       {
         where: { code }
       });
-    return payment;
+    return payment ?? null;
   }
 
   async findById(id: string): Promise<IPayment | null> {
-    const payment = await this.repository.payment.findFirst(
+    const payment = await this.repository.findFirst(
       {
         where: { id }
       });
-      return payment
+      return payment ?? null;
   }
 
 
   async findAll(): Promise<IPayment[]> {
-    const payments = await this.repository.payment.findMany({});
-    return payments;
+    const payments = await this.repository.findMany({});
+    return payments ?? [];
   }
 
   async findByOrder(id_order: string): Promise<IPayment | null> {
-    const payments = await this.repository.payment.findFirst({
+    const payment = await this.repository.findFirst({
       where: { id_order }
     });
-    return payments;
+    return payment ?? null;
   }
 
   async create(data: IPaymentRequest): Promise<IPayment> {
-    const newPayment = await this.repository.payment.create({
+    const newPayment = await this.repository.create({
       data
     })
     return newPayment;
   }
 
   async update(id: string, payment: IPaymentUpdateRequest): Promise<IPayment> {
-    const paymentUpdate = await this.repository.payment.update({
+    const paymentUpdate = await this.repository.update({
       data: payment,
       where: { id }
     })
@@ -51,7 +51,7 @@ export class PrismaPaymentRepository implements IPaymentRepository {
   }
 
   async delete(id: string): Promise<void> {
-    const paymentDelete = await this.repository.payment.delete({
+    const paymentDelete = await this.repository.delete({
       where: {
         id
       }

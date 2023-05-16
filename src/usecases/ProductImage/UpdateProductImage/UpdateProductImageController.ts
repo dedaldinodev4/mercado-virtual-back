@@ -9,7 +9,8 @@ export class UpdateProductImageController {
 
     async handle(request: Request, response: Response): Promise<Response> {
         const { id } = request.params;
-        const { url, id_product } = request.body;
+        const url = request.file?.path ?? '';
+        const { id_product } = request.body;
 
         try {
             const data = await this.updateProductImageUseCase.execute(id, { url, id_product });

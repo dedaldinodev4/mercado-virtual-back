@@ -8,5 +8,5 @@ export interface IDevelyRepository {
   findAll(): Promise<IDevely[]>;
   delete(id: string): Promise<void>;
   update(id: string, data: IDevelyUpdateRequest): Promise<IDevely | Error>;
-  create(data: IDevelyRequest): Promise<IDevely | Error>;
+  create(data: IDevelyRequest): Promise<IDevely>;
 }

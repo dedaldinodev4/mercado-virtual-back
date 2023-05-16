@@ -14,7 +14,7 @@ export class CreateOwnerController {
 
         try {
             const data = await this.createOwnerUseCase.execute({
-                firstName, lastName, dateBorn,
+                firstName, lastName, dateBorn: new Date(dateBorn),
                 identity, id_user
             });
 

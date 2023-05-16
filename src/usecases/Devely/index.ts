@@ -1,0 +1,1 @@
+export { develyRoutes } from './routes'

@@ -18,7 +18,12 @@ import { IUser } from '../dtos/User';
 
 
             try {
-                const data = verify(token, process.env.JWT_KEY ?? '')!! as { user: IUser};
+                const data = verify(token, process.env.JWT_KEY ?? '') as { user:{
+                    email: string;
+                    role: string;
+                    status: boolean;
+                    id: string;
+                }};
                 
                 const { user } = data;
                 request.user = user

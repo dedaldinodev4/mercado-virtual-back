@@ -6,5 +6,5 @@ export interface ICustomerTypeRepository {
   findAll(): Promise<ICustomerType[]>;
   delete(id: string): Promise<void>;
   update(id: string, data: ICustomerTypeRequest): Promise<ICustomerType | Error>;
-  create(data: ICustomerTypeRequest): Promise<ICustomerType | Error>;
+  create(data: ICustomerTypeRequest): Promise<ICustomerType>;
 }

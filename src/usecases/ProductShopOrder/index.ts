@@ -1,0 +1,1 @@
+export { productShopOrderRoutes } from './routes'

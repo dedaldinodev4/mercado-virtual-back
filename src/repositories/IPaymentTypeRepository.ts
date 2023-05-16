@@ -6,5 +6,5 @@ export interface IPaymentTypeRepository {
   findAll(): Promise<IPaymentType[]>;
   delete(id: string): Promise<void>;
   update(id: string, data: IPaymentTypeRequest): Promise<IPaymentType | Error>;
-  create(data: IPaymentTypeRequest): Promise<IPaymentType | Error>;
+  create(data: IPaymentTypeRequest): Promise<IPaymentType>;
 }

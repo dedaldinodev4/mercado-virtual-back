@@ -4,45 +4,45 @@ import { IProductShopOrderRepository } from "../../IProductShopOrderRepository";
 
 
 export class PrismaProductShopOrderRepository implements IProductShopOrderRepository {
-  private repository = prismaClient;
+  private repository = prismaClient.productShopOrder;
 
   async findById(id: string): Promise<IProductShopOrder | null> {
-    const productShopOrder = await this.repository.productShopOrder.findFirst(
+    const productShopOrder = await this.repository.findFirst(
       {
         where: { id }
       });
-      return productShopOrder
+      return productShopOrder ?? null;
   }
 
 
   async findAll(): Promise<IProductShopOrder[]> {
-    const productShopies = await this.repository.productShopOrder.findMany({});
-    return productShopies;
+    const productShopies = await this.repository.findMany({});
+    return productShopies ?? [];
   }
 
   async findByProductShop(id_productShop: string): Promise<IProductShopOrder[]> {
-    const productShopies = await this.repository.productShopOrder.findMany({
+    const productShopies = await this.repository.findMany({
       where: { id_productShop }
     });
-    return productShopies;
+    return productShopies ?? [];
   }
 
   async findByOrder(id_order: string): Promise<IProductShopOrder[]> {
-    const productShopies = await this.repository.productShopOrder.findMany({
+    const productShopies = await this.repository.findMany({
       where: { id_order }
     });
-    return productShopies;
+    return productShopies ?? [];
   }
 
   async create(data: IProductShopOrderRequest): Promise<IProductShopOrder> {
-    const newProductShopOrder = await this.repository.productShopOrder.create({
+    const newProductShopOrder = await this.repository.create({
       data
     })
     return newProductShopOrder;
   }
 
   async update(id: string, productShopOrder: IProductShopOrderRequest): Promise<IProductShopOrder> {
-    const productShopOrderUpdate = await this.repository.productShopOrder.update({
+    const productShopOrderUpdate = await this.repository.update({
       data: productShopOrder,
       where: { id }
     })
@@ -50,7 +50,7 @@ export class PrismaProductShopOrderRepository implements IProductShopOrderReposi
   }
 
   async delete(id: string): Promise<void> {
-    const productShopOrderDelete = await this.repository.productShopOrder.delete({
+    const productShopOrderDelete = await this.repository.delete({
       where: {
         id
       }

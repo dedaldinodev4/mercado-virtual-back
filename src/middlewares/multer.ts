@@ -1,9 +1,10 @@
 import multer from "multer";
+import path from 'node:path'
 
 //*  Storage *//
 const storage = multer.diskStorage({
     destination: function(req, file, cb) {
-      cb(null, '../public/uploads/');
+      cb(null, './public/uploads/');
     },
     filename: function(req, file, cb) {
       cb(null, new Date().getTime() + file.originalname);
@@ -27,3 +28,5 @@ export const upload = multer({
     },
     fileFilter: fileFilter
 });
+
+export const ImageDirectory = ''
