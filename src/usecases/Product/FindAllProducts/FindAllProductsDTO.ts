@@ -6,9 +6,11 @@ export interface IProduct {
   description: string;
   price: Decimal;
   quantity: number;
-  id_category: string;
   id_discount: string;
   starts_at: Date;
   ends_at: Date;
+  isOffer: boolean;
+  timestamp: number;
+  starRating: number;
   created_at: Date;
 }

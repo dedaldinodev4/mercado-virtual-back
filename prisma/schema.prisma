@@ -69,14 +69,15 @@ model Discount {
 
 //* Category *//
 model Category {
-  id          String    @id @default(uuid())
-  name        String
-  description String
-  created_at  DateTime  @default(now())
-  Products    Product[]
+  id            String        @id @default(uuid())
+  name          String
+  description   String
+  created_at    DateTime      @default(now())
+  ProductCategories ProductCategory[]
 
   @@map("_categories")
 }
+
 
 //* Product *//
 model Product {
@@ -87,14 +88,16 @@ model Product {
   quantity    Int
   starts_at   DateTime @default(now())
   ends_at     DateTime @default(now())
-  id_category String
   id_discount String
+  isOffer     Boolean
+  starRating  Int
+  timestamp   Int
   created_at  DateTime @default(now())
 
   ProductShoppies ProductShop[]
   ProductImages   ProductImages[]
+  ProductCategories ProductCategory[]
 
-  category Category @relation(fields: [id_category], references: [id])
   discount Discount @relation(fields: [id_discount], references: [id])
 
   @@map("_products")
@@ -105,8 +108,9 @@ model Customer {
   id              String       @id @default(uuid())
   firstName       String
   lastName        String
-  identity        String      @unique
+  identity        String       @unique
   dateBorn        DateTime     @db.Date
+  gender          String?
   id_customerType String
   id_user         String
   created_at      DateTime     @default(now())
@@ -181,6 +185,7 @@ model Owner {
   lastName   String
   identity   String   @unique
   dateBorn   DateTime @db.Date
+  gender     String?
   id_user    String
   created_at DateTime @default(now())
   Shoppies   Shop[]
@@ -215,6 +220,19 @@ model ProductShop {
   product Product @relation(fields: [id_product], references: [id])
 
   @@map("_products_shoppies")
+}
+
+//* Product Category *//
+model ProductCategory {
+  id                  String             @id @default(uuid())
+  id_product          String
+  id_category         String
+  created_at          DateTime           @default(now())
+
+  product   Product @relation(fields: [id_product], references: [id])
+  category  Category    @relation(fields: [id_category], references: [id])
+
+  @@map("_products_categories")
 }
 
 //* Cart *//

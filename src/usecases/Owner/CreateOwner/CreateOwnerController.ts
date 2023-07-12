@@ -9,13 +9,13 @@ export class CreateOwnerController {
 
     async handle(request: Request, response: Response): Promise<Response> {
         const { firstName, lastName, dateBorn,
-            identity, id_user
+            identity, id_user, gender
         } = request.body;
 
         try {
             const data = await this.createOwnerUseCase.execute({
                 firstName, lastName, dateBorn: new Date(dateBorn),
-                identity, id_user
+                identity, id_user, gender
             });
 
             return response.status(201).json(data);

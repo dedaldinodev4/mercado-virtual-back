@@ -18,6 +18,7 @@ import { productRoutes } from "../usecases/Product";
 import { productImageRoutes } from "../usecases/ProductImage";
 import { shopRoutes } from "../usecases/Shop";
 import { productShopRoutes } from "../usecases/ProductShop";
+import { productCategoryRoutes } from "../usecases/ProductCategory";
 import { productShopOrderRoutes } from "../usecases/ProductShopOrder";
 
 const router = Router();
@@ -58,6 +59,8 @@ router.use(`/api/v1/product_images`, productImageRoutes)
 router.use(`/api/v1/shopies`, shopRoutes)
 //* ProductShopies Routes *//
 router.use(`/api/v1/product_shopies`, productShopRoutes)
+//* ProductCategories Routes *//
+router.use(`/api/v1/product_categories`, productCategoryRoutes)
 //* ProductShopOrders Routes *//
 router.use(`/api/v1/productShop_orders`, productShopOrderRoutes)
 

@@ -5,6 +5,7 @@ export interface IOwner{
   lastName: string; 
   identity: string; 
   dateBorn: Date;
+  gender: string | null;
   id_user: string;
   created_at: Date;
 }

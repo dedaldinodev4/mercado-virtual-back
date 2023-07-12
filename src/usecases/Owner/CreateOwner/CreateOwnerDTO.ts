@@ -5,6 +5,7 @@ export interface ICreateOwnerRequest{
   lastName: string; 
   identity: string; 
   dateBorn: Date;
+  gender: string | null;
   id_user: string;
 }
 

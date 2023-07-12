@@ -5,9 +5,9 @@ import { ensuredAuthenticated } from "../../../middlewares";
 import { createProductFactory } from "../CreateProduct/CreateProductFactory";
 import { findAllProductsFactory } from "../FindAllProducts/FindAllProductsFactory";
 import { findByIdProductFactory } from "../FindByIdProduct/FindByIdProductFactory";
-import { findByCategoryProductFactory } from "../FindByCategoryProduct/FindByCategoryProductFactory";
 import { deleteProductFactory } from "../DeleteProduct/DeleteProductFactory";
 import { updateProductFactory } from "../UpdateProduct/UpdateProductFactory";
+import { findByOfferProductFactory } from "../FindByOfferProduct/FindByOfferProductFactory";
 
 
 export const productRoutes = Router();
@@ -21,5 +21,6 @@ productRoutes.route('/:id')
   .put(ensuredAuthenticated(), (request, response) => { return updateProductFactory().handle(request, response) } )
   .delete(ensuredAuthenticated(), (request, response) => { return deleteProductFactory().handle(request, response) } )
 
-productRoutes.route('/ByCategory/:id_category')
-  .get((request, response) => { return findByCategoryProductFactory().handle(request, response) })
+
+productRoutes.route('/offers')
+  .get((request, response) => { return findByOfferProductFactory().handle(request, response) })

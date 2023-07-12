@@ -6,6 +6,7 @@ export interface ICustomer{
   identity: string; 
   dateBorn: Date;
   id_customerType: string; 
+  gender: string | null;
   id_user: string;
   created_at: Date;
 }

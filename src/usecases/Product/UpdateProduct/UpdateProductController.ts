@@ -9,11 +9,11 @@ export class UpdateProductController {
 
     async handle(request: Request, response: Response): Promise<Response> {
         const { id } = request.params;
-        const { name, description, quantity, price } = request.body;
+        const { name, description, quantity, price, isOffer, starRating } = request.body;
 
         try {
             const data = await this.updateProductUseCase.execute(id, {
-                name, description, quantity, price
+                name, description, quantity, price, isOffer, starRating
             });
 
             return response.status(201).json(data);

@@ -6,13 +6,15 @@ export interface IUpdateProductRequest {
   description: string;
   price: Decimal;
   quantity: number;
+  isOffer: boolean;
+  starRating: number;
 }
 
 export interface IUpdateProduct extends IUpdateProductRequest {
   id: string;
   starts_at: Date;
+  timestamp: number;
   ends_at: Date;
-  id_category: string;
   id_discount: string;
   created_at: Date;
 }

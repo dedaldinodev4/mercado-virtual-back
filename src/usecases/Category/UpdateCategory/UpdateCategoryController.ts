@@ -9,10 +9,10 @@ export class UpdateCategoryController {
 
     async handle(request: Request, response: Response): Promise<Response> {
         const { id } = request.params;
-        const { name, description } = request.body;
+        const { name, description, id_subCategory } = request.body;
 
         try {
-            const data = await this.updateCategoryUseCase.execute(id, { name, description });
+            const data = await this.updateCategoryUseCase.execute(id, { name, description, id_subCategory });
 
             return response.status(201).json(data);
         } catch(err: any) {

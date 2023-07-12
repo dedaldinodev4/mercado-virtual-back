@@ -8,15 +8,18 @@ export class CreateProductController {
   ) { }
 
   async handle(request: Request, response: Response): Promise<Response> {
+    const timestamp = Date.now();
     const {
       name, description, price,
-      quantity, id_category, id_discount
+      quantity, id_discount, 
+      isOffer, starRating
     } = request.body;
 
     try {
       const data = await this.createProductUseCase.execute({
         name, description, price,
-        quantity, id_category, id_discount
+        quantity, id_discount,
+        isOffer, starRating, timestamp
       });
 
       return response.status(201).json(data);

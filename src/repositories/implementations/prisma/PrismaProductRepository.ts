@@ -29,10 +29,11 @@ export class PrismaProductRepository implements IProductRepository {
     return products ?? [];
   }
 
-  async findByCategory(id_category: string): Promise<IProduct[]> {
+
+  async findByIsOffer(): Promise<IProduct[]> {
     const products = await this.repository.findMany({
       where: {
-        id_category
+        isOffer: true
       }
     });
     return products ?? [];

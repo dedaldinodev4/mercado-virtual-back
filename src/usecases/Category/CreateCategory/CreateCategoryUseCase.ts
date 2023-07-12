@@ -15,9 +15,9 @@ export class CreateCategoryUseCase {
             throw new Error('Data is required.')  
         }
 
-        if (categoryExists) {
-          throw new Error('Category already exists.')
-        }
+        // if (categoryExists) {
+        //   throw new Error('Category already exists.')
+        // }
         const result = await this.categoryRepository.create(data);
 
         return result;

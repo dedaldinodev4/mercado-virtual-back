@@ -12,6 +12,8 @@ export interface ICreateProductRequest {
   description: string;
   price: Decimal;
   quantity: number;
-  id_category: string;
   id_discount: string;
+  isOffer: boolean;
+  timestamp: number;
+  starRating: number;
 }

@@ -8,8 +8,10 @@ export interface IProduct extends IBaseDTO {
   quantity: number;
   starts_at: Date;
   ends_at: Date;
-  id_category: string;
   id_discount: string;
+  isOffer: boolean;
+  starRating: number;
+  timestamp: number;
 }
 
 export interface IProductRequest {
@@ -17,8 +19,10 @@ export interface IProductRequest {
   description: string;
   price: Decimal;
   quantity: number;
-  id_category: string;
   id_discount: string;
+  isOffer: boolean;
+  starRating: number;
+  timestamp: number;
 }
 
 export interface IProductUpdateRequest {
@@ -26,5 +30,7 @@ export interface IProductUpdateRequest {
   description: string;
   price: Decimal;
   quantity: number;
+  isOffer: boolean;
+  starRating: number;
 }
 

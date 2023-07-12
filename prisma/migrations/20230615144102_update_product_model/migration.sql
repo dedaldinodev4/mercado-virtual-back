@@ -1,0 +1,5 @@
+-- AlterTable
+ALTER TABLE "_products" ALTER COLUMN "ends_at" DROP NOT NULL,
+ALTER COLUMN "isOffer" DROP NOT NULL,
+ALTER COLUMN "starRating" DROP NOT NULL,
+ALTER COLUMN "timestamp" DROP NOT NULL;

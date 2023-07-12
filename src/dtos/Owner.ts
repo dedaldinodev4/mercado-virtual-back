@@ -7,6 +7,7 @@ export interface IOwnerRequest{
   lastName: string; 
   identity: string; 
   dateBorn: Date;
+  gender: string | null;
   id_user: string;  
 }
 
@@ -15,4 +16,5 @@ export interface IOwnerUpdateRequest{
   lastName: string; 
   identity: string; 
   dateBorn: Date;
+  gender: string | null;
 }

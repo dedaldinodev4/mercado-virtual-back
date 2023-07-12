@@ -1,17 +1,16 @@
 import { Request, Response } from 'express'
-import { FindByCategoryProductUseCase } from './FindByCategoryProductUseCase'
+import { FindByOfferProductUseCase } from './FindByOfferProductUseCase'
 
 
-export class FindByCategoryProductController {
+export class FindByOfferProductController {
     constructor(
-        private findByCategoryProductUseCase: FindByCategoryProductUseCase
+        private findByOfferProductUseCase: FindByOfferProductUseCase
     ) { }
 
     async handle(request: Request, response: Response): Promise<Response> {
-        const { id_category } = request.params;
 
         try {
-            const data = await this.findByCategoryProductUseCase.execute(id_category);
+            const data = await this.findByOfferProductUseCase.execute();
 
             return response.status(200).json(data);
         } catch (err: any) {

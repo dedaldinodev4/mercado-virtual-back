@@ -7,6 +7,7 @@ export interface ICustomerRequest{
   lastName: string; 
   identity: string; 
   dateBorn: Date;
+  gender: string | null;
   id_customerType: string; 
   id_user: string;  
 }
@@ -16,4 +17,5 @@ export interface ICustomerUpdateRequest{
   lastName: string; 
   identity: string; 
   dateBorn: Date;
+  gender: string | null;
 }

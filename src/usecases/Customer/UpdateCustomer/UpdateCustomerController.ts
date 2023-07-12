@@ -9,11 +9,11 @@ export class UpdateCustomerController {
 
     async handle(request: Request, response: Response): Promise<Response> {
         const { id } = request.params;
-        const { firstName, lastName, identity, dateBorn } = request.body;
+        const { firstName, lastName, identity, dateBorn, gender } = request.body;
 
         try {
             const data = await this.updateCustomerUseCase
-                .execute(id, { firstName, lastName, identity, dateBorn: new Date(dateBorn) });
+                .execute(id, { firstName, lastName, identity, gender, dateBorn: new Date(dateBorn) });
 
             return response.status(201).json(data);
         } catch(err: any) {
