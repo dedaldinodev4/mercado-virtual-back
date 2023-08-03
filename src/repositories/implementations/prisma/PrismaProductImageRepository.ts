@@ -39,6 +39,8 @@ export class PrismaProductImageRepository implements IProductImageRepository {
       {
         where: { id }
       });
+
+  
   }
 
   async create(data: IProductImageRequest): Promise<IProductImage> {

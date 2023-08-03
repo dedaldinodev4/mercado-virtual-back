@@ -12,10 +12,15 @@ export class SignUpUseCase {
     async execute(data: ISignUpRequest): Promise<ICurrentUser | Error> {
       
         if (!data) {
-          throw new Error('Email is required.')  
+          throw new Error('Email é um campo obrigatório.')  
         }
 
+        
         const user = await this.authRepository.signUp(data);
+
+        if (user instanceof Error) {
+            throw new Error('Já existe um usuário com este Email.') 
+        }
 
         return user;
     }

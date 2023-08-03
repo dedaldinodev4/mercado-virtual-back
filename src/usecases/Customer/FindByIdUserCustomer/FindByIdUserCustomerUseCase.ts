@@ -11,13 +11,13 @@ export class FindByIdUserCustomerUseCase {
     async execute(id_user: string): Promise<ICustomer | Error> {
 
       if (!id_user) {
-        throw new Error('Id is required.')  
+        throw new Error('Necessita passar o Id.')  
       }
       
       const customer = await this.customerRepository.findByIdUser(id_user);
 
       if (!customer) {
-        throw new Error('customer does not exists.');
+        throw new Error('Cliente não existe no sistema.');
       }
 
       return customer;

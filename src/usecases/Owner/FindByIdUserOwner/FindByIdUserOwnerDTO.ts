@@ -1,10 +1,10 @@
 
 export interface IOwner{
   id: string;
-  firstName: string;
-  lastName: string; 
-  identity: string; 
-  dateBorn: Date;
+  firstName: string | null;
+  lastName: string | null; 
+  identity: string | null; 
+  dateBorn: Date | null;
   gender: string | null;
   id_user: string;
   created_at: Date;

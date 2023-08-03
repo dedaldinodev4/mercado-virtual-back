@@ -31,10 +31,10 @@ model User {
 //* Address *//
 model Address {
   id          String   @id @default(uuid())
-  city        String
+  city        String?
   contry      String
-  hood        String
-  postal_code String
+  hood        String?
+  postal_code String?
   created_at  DateTime @default(now())
   id_user     String
   user        User     @relation(fields: [id_user], references: [id])
@@ -46,7 +46,7 @@ model Address {
 //* Phone *//
 model Phone {
   id         String   @id @default(uuid())
-  number     String
+  number     String?
   id_user    String
   created_at DateTime @default(now())
   user       User     @relation(fields: [id_user], references: [id])
@@ -69,15 +69,14 @@ model Discount {
 
 //* Category *//
 model Category {
-  id            String        @id @default(uuid())
-  name          String
-  description   String
-  created_at    DateTime      @default(now())
+  id                String            @id @default(uuid())
+  name              String
+  description       String
+  created_at        DateTime          @default(now())
   ProductCategories ProductCategory[]
 
   @@map("_categories")
 }
-
 
 //* Product *//
 model Product {
@@ -94,22 +93,23 @@ model Product {
   timestamp   Int
   created_at  DateTime @default(now())
 
-  ProductShoppies ProductShop[]
-  ProductImages   ProductImages[]
+  ProductShoppies   ProductShop[]
+  ProductImages     ProductImages[]
   ProductCategories ProductCategory[]
+  ProductDetails ProductDetails[]
 
-  discount Discount @relation(fields: [id_discount], references: [id])
-
+  discount       Discount         @relation(fields: [id_discount], references: [id])
+  
   @@map("_products")
 }
 
 //* Customer *//
 model Customer {
   id              String       @id @default(uuid())
-  firstName       String
-  lastName        String
-  identity        String       @unique
-  dateBorn        DateTime     @db.Date
+  firstName       String?
+  lastName        String?
+  identity        String?       @unique
+  dateBorn        DateTime?     @db.Date
   gender          String?
   id_customerType String
   id_user         String
@@ -181,10 +181,10 @@ model PaymentType {
 //* Owner *//
 model Owner {
   id         String   @id @default(uuid())
-  firstName  String
-  lastName   String
-  identity   String   @unique
-  dateBorn   DateTime @db.Date
+  firstName  String?
+  lastName   String?
+  identity   String?   @unique
+  dateBorn   DateTime? @db.Date
   gender     String?
   id_user    String
   created_at DateTime @default(now())
@@ -224,13 +224,13 @@ model ProductShop {
 
 //* Product Category *//
 model ProductCategory {
-  id                  String             @id @default(uuid())
-  id_product          String
-  id_category         String
-  created_at          DateTime           @default(now())
+  id          String   @id @default(uuid())
+  id_product  String
+  id_category String
+  created_at  DateTime @default(now())
 
-  product   Product @relation(fields: [id_product], references: [id])
-  category  Category    @relation(fields: [id_category], references: [id])
+  product  Product  @relation(fields: [id_product], references: [id])
+  category Category @relation(fields: [id_category], references: [id])
 
   @@map("_products_categories")
 }
@@ -282,4 +282,34 @@ model ProductImages {
   product    Product  @relation(fields: [id_product], references: [id])
 
   @@map("_product_images")
+}
+
+//* ProductDetails *//
+model ProductDetails {
+  id                    String   @id @default(uuid())
+  processor             String?
+  screen                String?
+  operating_system      String?
+  ram                   String?
+  ssd                   String?
+  ports                 String?
+  graphic               String?
+  warranty              String?
+  back_camera           String?
+  front_camera          String?
+  battery               String?
+  frequency_response    String?
+  microphone            Boolean?
+  wireless              Boolean?
+  wireless_standby_time Boolean?
+  connectionType        String?
+  connectors            String?
+  bluetooth             Boolean?
+  noise_cancelling      Boolean?
+  sound_isolating       Boolean?
+  id_product            String
+  created_at            DateTime @default(now())
+  product               Product  @relation(fields: [id_product], references: [id])
+
+  @@map("_product_details")
 }

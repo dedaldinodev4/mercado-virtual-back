@@ -10,14 +10,13 @@ export class CreateAddressUseCase {
 
     async execute(data: ICreateAddressRequest): Promise<ICreateAddress | Error> {
 
-        const addressExists = await this.addressRepository.findByPostalCode(data.postal_code);
 
-        if (!data) {
-            throw new Error('Data is required.')  
-        }
+        if (data.postal_code) {
+            const addressExists = await this.addressRepository.findByPostalCode(data.postal_code);
 
-        if (addressExists) {
-            throw new Error('Address already exists.')  
+            if (addressExists) {
+                throw new Error('Endereço já existe, use um outro código postal.')  
+            }
         }
 
         const result = await this.addressRepository.create(data);

@@ -17,7 +17,7 @@ export class FindByIdOwnerUseCase {
     const owner = await this.ownerRepository.findById(id);
 
     if (!owner) {
-      throw new Error('Owner does not exists.');
+      throw new Error('Propritário não existe.');
     }
 
     return owner;

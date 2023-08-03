@@ -10,7 +10,14 @@ export class PrismaProductRepository implements IProductRepository {
   async findById(id: string): Promise<IProduct | null> {
     const product = await this.repository.findFirst(
       {
-        where: { id }
+        where: { id },
+        include: {
+          ProductCategories: { include: { category: true }},
+          discount: true,
+          ProductShoppies: { include: { shop: true } },
+          ProductImages: true,
+          ProductDetails: true
+        }
       });
     return product ?? null;
   }
@@ -19,13 +26,28 @@ export class PrismaProductRepository implements IProductRepository {
   async findByName(name: string): Promise<IProduct | null> {
     const product = await this.repository.findFirst(
       {
-        where: { name }
+        where: { name },
+        include: {
+          ProductCategories: { include: { category: true }},
+          discount: true,
+          ProductShoppies: { include: { shop: true } },
+          ProductImages: true,
+          ProductDetails: true
+        }
       });
     return product ?? null;
   }
 
   async findAll(): Promise<IProduct[]> {
-    const products = await this.repository.findMany({});
+    const products = await this.repository.findMany({
+      include: {
+        ProductCategories: { include: { category: true }},
+        discount: true,
+        ProductShoppies: { include: { shop: true } },
+        ProductImages: true,
+        ProductDetails: true
+      }
+    });
     return products ?? [];
   }
 
@@ -34,6 +56,13 @@ export class PrismaProductRepository implements IProductRepository {
     const products = await this.repository.findMany({
       where: {
         isOffer: true
+      },
+      include: {
+        ProductCategories: { include: { category: true }} ,
+        discount: true,
+        ProductShoppies: { include: { shop: true } },
+        ProductImages: true,
+        ProductDetails: true
       }
     });
     return products ?? [];

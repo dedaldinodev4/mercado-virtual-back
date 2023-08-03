@@ -23,13 +23,14 @@ export class PrismaAuthRepository implements IAuthRepository {
             email: user.email,
             id: user.id,
             role: user.role,
-            status: user.status
+            status: user.status,
+            username: user.username
           }
 
           const token = jwt.sign(
             { user:  userCurrent }, 
             process.env.JWT_KEY ?? 'secret',
-            { expiresIn: "12h"}
+            { expiresIn: "30d"}
           );
 
           return {
@@ -38,21 +39,29 @@ export class PrismaAuthRepository implements IAuthRepository {
           }
         }
       }
-      return new Error('Email or password invalid');
+      return new Error('Email ou Senha inválido.');
     }
 
         
-    async signUp(user: ISignUpRequest): Promise<ICurrentUser> {
-      const { email, role, status, username, password, avatar } = user;
-      
+    async signUp(user: ISignUpRequest): Promise<ICurrentUser | Error> {
+      const { email, role, username, password } = user;
+    
+      const userExists = await this.repository.user.findFirst(
+        { where: { email }
+      });
+
+
+      if (userExists) {
+        return new Error('Já existe um usuário com este Email.');
+      }
       const newUser = await this.repository.user.create({
         data: {
           email,
           password: hashPassword(password),
           role,
           username,
-          status,
-          avatar
+          status: true,
+          avatar: ''
         }
       })
 
@@ -60,13 +69,14 @@ export class PrismaAuthRepository implements IAuthRepository {
         email: newUser.email,
         id: newUser.id,
         role: newUser.role,
-        status: newUser.status
+        status: newUser.status,
+        username: user.username
       }
 
       const token = jwt.sign(
         { user:  userCurrent }, 
         process.env.JWT_KEY ?? 'secret',
-        { expiresIn: "12h"}
+        { expiresIn: "30d"}
       );
 
       return {

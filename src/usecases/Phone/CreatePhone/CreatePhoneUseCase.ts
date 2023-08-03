@@ -9,15 +9,15 @@ export class CreatePhoneUseCase {
     ){}
 
     async execute(data: ICreatePhoneRequest): Promise<ICreatePhone | Error> {
-        const phoneExists = await this.phoneRepository.findByNumber(data.number);
+        
 
-        if (!data.number) {
-            throw new Error('Number is required.')  
+        if (data.number) {
+            const phoneExists = await this.phoneRepository.findByNumber(data.number);
+            if (phoneExists) {
+              throw new Error('Número já existe no sistema.')
+            }
         }
-
-        if (phoneExists) {
-          throw new Error('Phone number already exists.')
-        }
+        
         const result = await this.phoneRepository.create(data);
 
         return result;

@@ -1,4 +1,6 @@
 import { Request, Response } from 'express'
+import path  from 'path'
+import { imageDirectory } from '../../../server';
 import { CreateProductImageUseCase } from './CreateProductImageUseCase'
 
 

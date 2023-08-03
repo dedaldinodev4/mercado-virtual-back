@@ -12,7 +12,7 @@ export class UpdateCustomerUseCase {
         const customerExists = await this.customerRepository.findById(id);
 
         if (!customerExists) {
-          throw new Error('Customer does not exists.')
+          throw new Error('Cliente não existe no sistema.')
         }
         const result = await this.customerRepository.update(id, data);
 

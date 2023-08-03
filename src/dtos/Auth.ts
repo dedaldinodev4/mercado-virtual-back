@@ -5,6 +5,7 @@ export interface IUser {
   email: string;
   status: boolean;
   role: string;
+  username: string;
 }
 
 export interface IAuthRequest extends Request{
@@ -27,7 +28,7 @@ export interface ISignUpRequest {
   username:string;
   password:string;
   role: string;
-  status: boolean;
-  avatar: string;
+  status?: boolean;
+  avatar?: string;
 }
 

@@ -17,7 +17,7 @@ export class FindByIdPhoneUseCase {
       const phone = await this.phoneRepository.findById(id);
 
       if (!phone) {
-        throw new Error('Phone does not exists.');
+        throw new Error('Número de telefone não existe no sistema.');
       }
 
       return phone;

@@ -17,7 +17,7 @@ export class FindByIdCustomerUseCase {
     const customer = await this.customerRepository.findById(id);
 
     if (!customer) {
-      throw new Error('Customer does not exists.');
+      throw new Error('Cliente não existe no sistema.');
     }
 
     return customer;

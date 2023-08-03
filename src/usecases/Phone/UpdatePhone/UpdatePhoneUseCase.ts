@@ -12,7 +12,7 @@ export class UpdatePhoneUseCase {
         const phoneExists = await this.phoneRepository.findById(id);
 
         if (!phoneExists) {
-          throw new Error('Phone number does not exists.')
+          throw new Error('Número de telefone não existe no sistema.')
         }
         const result = await this.phoneRepository.update(id, data);
 

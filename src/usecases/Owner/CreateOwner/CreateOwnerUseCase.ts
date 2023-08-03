@@ -11,19 +11,21 @@ export class CreateOwnerUseCase {
   ) { }
 
   async execute(data: ICreateOwnerRequest): Promise<ICreateOwner | Error> {
-    const ownerExists = await this.ownerRepository.findByIdentity(data.identity);
-  
-
+    
+    
     if (!data) {
       throw new Error('Data is required.')
     }
+    
+    if (data.identity) {
+      const ownerExists = await this.ownerRepository.findByIdentity(data.identity);
 
-    if (ownerExists) {
-      throw new Error('Owner already exists.')
+      if (ownerExists) {
+        throw new Error('Proprietário já existe no sistema.')
+      }
     }
 
     const result = await this.ownerRepository.create(data);
-
     return result;
   }
 }

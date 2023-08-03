@@ -12,7 +12,7 @@ export class UpdateAddressUseCase {
         const addressExists = await this.addressRepository.findById(id);
 
         if (!addressExists) {
-          throw new Error('address does not exists.')
+          throw new Error('aendereço não existe.')
         }
         const result = await this.addressRepository.update(id, data);
 

@@ -19,13 +19,13 @@ export class CreateProductImageUseCase {
     }
 
     if (productImageExists) {
-      throw new Error('URL already exists.')
+      throw new Error('URL já existe.')
     }
 
     const productExists = await this.productRepository.findById(data.id_product)
 
     if (!productExists) {
-      throw new Error('Product does not exists.')
+      throw new Error('Produto não existe no banco de dados.')
     }
 
     const result = await this.productImageRepository.create(data);

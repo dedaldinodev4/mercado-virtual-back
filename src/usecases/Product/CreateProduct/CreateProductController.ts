@@ -8,7 +8,7 @@ export class CreateProductController {
   ) { }
 
   async handle(request: Request, response: Response): Promise<Response> {
-    const timestamp = Date.now();
+    const timestamp = new Date().getMilliseconds();
     const {
       name, description, price,
       quantity, id_discount, 

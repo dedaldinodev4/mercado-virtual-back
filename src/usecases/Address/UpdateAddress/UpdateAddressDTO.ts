@@ -1,13 +1,17 @@
 
 export interface IUpdateAddressRequest{
-  city: string;
+  city?: string;
   contry: string; 
-  hood: string; 
-  postal_code: string;
+  hood?: string; 
+  postal_code?: string;
 }
 
-export interface IUpdateAddress extends IUpdateAddressRequest {
+export interface IUpdateAddress {
   id: string;
-  id_user: string;
+  city: string | null;
+  contry: string; 
+  hood: string | null; 
+  postal_code: string | null;
+  id_user: string;  
   created_at: Date;  
 }

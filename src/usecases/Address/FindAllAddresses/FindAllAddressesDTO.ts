@@ -2,10 +2,10 @@
 
 export interface IAddress {
   id: string;
-  city: string;
+  city: string | null;
   contry: string; 
-  hood: string; 
-  postal_code: string;
-  id_user: string;
-  created_at: Date;  
+  hood: string | null; 
+  postal_code: string | null;
+  id_user: string;  
+  created_at: Date;
 }

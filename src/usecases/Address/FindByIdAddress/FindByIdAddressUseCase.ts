@@ -17,7 +17,7 @@ export class FindByIdAddressUseCase {
       const address = await this.addressRepository.findById(id);
 
       if (!address) {
-        throw new Error('Address does not exists.');
+        throw new Error('Endereço não existe.');
       }
 
       return address;

@@ -12,7 +12,7 @@ export class UpdateOwnerUseCase {
         const ownerExists = await this.ownerRepository.findById(id);
 
         if (!ownerExists) {
-            throw new Error('Owner does not exists.');
+            throw new Error('Proprietário não existe no sistema.');
         }
         const result = await this.ownerRepository.update(id, data);
 

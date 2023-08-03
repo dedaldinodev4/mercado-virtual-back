@@ -11,13 +11,13 @@ export class FindByIdentityCustomerUseCase {
   async execute(identity: string): Promise<ICustomer | Error> {
 
     if (!identity) {
-      throw new Error('Identity is required.')
+      throw new Error('Identidade precisa ser passada.')
     }
 
     const customer = await this.customerRepository.findByIdentity(identity);
 
     if (!customer) {
-      throw new Error('Customer does not exists.');
+      throw new Error('Cliente não exite no sistema.');
     }
 
     return customer;

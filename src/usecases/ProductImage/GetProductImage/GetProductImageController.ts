@@ -16,8 +16,7 @@ export class GetProductImageController {
         try {
             const data = await this.getProductImageUseCase.execute(url);
             const imagePath = path.join(imageDirectory, url);
-
-            return response.sendFile(imagePath);
+            return response.status(200).json(imagePath);
         } catch (err: any) {
             return response.status(400).json({
                 message: err?.message || 'Unexpected error.'

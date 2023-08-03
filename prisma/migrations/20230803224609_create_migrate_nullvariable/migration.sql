@@ -1,0 +1,19 @@
+-- AlterTable
+ALTER TABLE "_addresses" ALTER COLUMN "city" DROP NOT NULL,
+ALTER COLUMN "hood" DROP NOT NULL,
+ALTER COLUMN "postal_code" DROP NOT NULL;
+
+-- AlterTable
+ALTER TABLE "_customers" ALTER COLUMN "firstName" DROP NOT NULL,
+ALTER COLUMN "lastName" DROP NOT NULL,
+ALTER COLUMN "dateBorn" DROP NOT NULL,
+ALTER COLUMN "identity" DROP NOT NULL;
+
+-- AlterTable
+ALTER TABLE "_owners" ALTER COLUMN "firstName" DROP NOT NULL,
+ALTER COLUMN "lastName" DROP NOT NULL,
+ALTER COLUMN "dateBorn" DROP NOT NULL,
+ALTER COLUMN "identity" DROP NOT NULL;
+
+-- AlterTable
+ALTER TABLE "_phones" ALTER COLUMN "number" DROP NOT NULL;

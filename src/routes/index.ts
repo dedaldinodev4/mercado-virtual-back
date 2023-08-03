@@ -20,6 +20,7 @@ import { shopRoutes } from "../usecases/Shop";
 import { productShopRoutes } from "../usecases/ProductShop";
 import { productCategoryRoutes } from "../usecases/ProductCategory";
 import { productShopOrderRoutes } from "../usecases/ProductShopOrder";
+import { productDetailRoutes } from "../usecases/ProductDetail";
 
 const router = Router();
 
@@ -55,6 +56,8 @@ router.use(`/api/v1/payment_types`, paymentTypeRoutes)
 router.use(`/api/v1/products`, productRoutes)
 //* ProductImages Routes *//
 router.use(`/api/v1/product_images`, productImageRoutes)
+//* ProductDetails Routes *//
+router.use(`/api/v1/product_details`, productDetailRoutes)
 //* Shopies Routes *//
 router.use(`/api/v1/shopies`, shopRoutes)
 //* ProductShopies Routes *//

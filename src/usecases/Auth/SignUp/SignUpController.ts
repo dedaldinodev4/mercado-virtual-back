@@ -8,13 +8,12 @@ export class SignUpController {
     ){}
 
     async handle(request: Request, response: Response): Promise<Response> {
-        const { email, username, role, password, avatar } = request.body;
+        const { email, username, role, password } = request.body;
 
         try {
             const data = await this.signUpUseCase.execute({
                 email, username, 
-                role, password, 
-                status: true, avatar
+                role, password
             });
 
             return response.status(201).json(data);

@@ -1,15 +1,21 @@
 
 
 export interface ICreateOwnerRequest{
-  firstName: string;
-  lastName: string; 
-  identity: string; 
-  dateBorn: Date;
+  firstName?: string;
+  lastName?: string; 
+  identity?: string; 
+  dateBorn?: Date;
   gender: string | null;
   id_user: string;
 }
 
-export interface ICreateOwner extends ICreateOwnerRequest{
+export interface ICreateOwner {
   id: string;
-  created_at: Date;  
+  firstName: string | null;
+  lastName: string | null; 
+  identity: string | null; 
+  dateBorn: Date | null;
+  gender: string | null;
+  id_user: string;
+  created_at: Date;
 }
