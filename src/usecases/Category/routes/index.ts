@@ -11,10 +11,10 @@ import { updateCategoryFactory } from "../UpdateCategory/UpdateCategoryFactory";
 export const categoryRoutes = Router();
 
 categoryRoutes.route('/')
-  .post(ensuredAuthenticated(), (request, response) => { return createCategoryFactory().handle(request, response) } )
+  .post((request, response) => { return createCategoryFactory().handle(request, response) } )
   .get((request, response) => { return findAllCategoriesFactory().handle(request, response) } )
 
 categoryRoutes.route('/:id')
   .get((request, response) => { return findByIdCategoryFactory().handle(request, response) } )
-  .put(ensuredAuthenticated(), (request, response) => { return updateCategoryFactory().handle(request, response) } )
-  .delete(ensuredAuthenticated(), (request, response) => { return deleteCategoryFactory().handle(request, response) } )
+  .put((request, response) => { return updateCategoryFactory().handle(request, response) } )
+  .delete((request, response) => { return deleteCategoryFactory().handle(request, response) } )

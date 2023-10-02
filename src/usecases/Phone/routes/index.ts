@@ -12,13 +12,13 @@ import { updatePhoneFactory } from "../UpdatePhone/UpdatePhoneFactory";
 export const phoneRoutes = Router();
 
 phoneRoutes.route('/')
-  .post(ensuredAuthenticated(), (request, response) => { return createPhoneFactory().handle(request, response) } )
+  .post((request, response) => { return createPhoneFactory().handle(request, response) } )
   .get((request, response) => { return findAllPhonesFactory().handle(request, response) } )
 
 phoneRoutes.route('/:id')
   .get((request, response) => { return findByIdPhoneFactory().handle(request, response) } )
-  .put(ensuredAuthenticated(), (request, response) => { return updatePhoneFactory().handle(request, response) } )
-  .delete(ensuredAuthenticated(), (request, response) => { return deletePhoneFactory().handle(request, response) } )
+  .put((request, response) => { return updatePhoneFactory().handle(request, response) } )
+  .delete((request, response) => { return deletePhoneFactory().handle(request, response) } )
 
 phoneRoutes.route('/ByUser/:id_user')
   .get((request, response) => { return findByUserPhoneFactory().handle(request, response) } )

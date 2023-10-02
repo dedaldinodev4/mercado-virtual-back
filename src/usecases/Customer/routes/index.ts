@@ -13,13 +13,13 @@ import { ensuredAuthenticated } from "../../../middlewares";
 export const customerRoutes = Router();
 
 customerRoutes.route('/')
-  .post(ensuredAuthenticated(), (request, response) => { return createCustomerFactory().handle(request, response) } )
+  .post((request, response) => { return createCustomerFactory().handle(request, response) } )
   .get((request, response) => { return findAllCustomersFactory().handle(request, response) } )
   
 customerRoutes.route('/:id')
   .get((request, response) => { return findByIdCustomerFactory().handle(request, response) } )
-  .put(ensuredAuthenticated(), (request, response) => { return updateCustomerFactory().handle(request, response) } )
-  .delete(ensuredAuthenticated(), (request, response) => { return deleteCustomerFactory().handle(request, response) } )
+  .put((request, response) => { return updateCustomerFactory().handle(request, response) } )
+  .delete((request, response) => { return deleteCustomerFactory().handle(request, response) } )
   
 customerRoutes.route('/userById/:id_user')
   .get((request, response) => { return findByIdUserCustomerFactory().handle(request, response) } )

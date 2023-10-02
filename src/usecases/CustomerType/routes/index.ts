@@ -12,13 +12,13 @@ import { updateCustomerTypeFactory } from '../UpdateCustomerType/UpdateCustomerT
 export const customerTypeRoutes = Router();
 
 customerTypeRoutes.route('/')
-  .post(ensuredAuthenticated() , (request, response) => { return createCustomerTypeFactory().handle(request, response) } )
+  .post((request, response) => { return createCustomerTypeFactory().handle(request, response) } )
   .get((request, response) => { return findAllCustomerTypesFactory().handle(request, response) } )
   
 customerTypeRoutes.route('/:id')
   .get((request, response) => { return findByIdCustomerTypeFactory().handle(request, response) } )
-  .put(ensuredAuthenticated(), (request, response) => { return updateCustomerTypeFactory().handle(request, response) } )
-  .delete(ensuredAuthenticated(), (request, response) => { return deleteCustomerTypeFactory().handle(request, response) } )
+  .put( (request, response) => { return updateCustomerTypeFactory().handle(request, response) } )
+  .delete( (request, response) => { return deleteCustomerTypeFactory().handle(request, response) } )
 
 customerTypeRoutes.route('/ByName/:name')
   .get((request, response) => { return findByNameCustomerTypeFactory().handle(request, response) } )

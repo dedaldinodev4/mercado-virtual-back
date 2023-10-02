@@ -14,13 +14,13 @@ import { updateProductCategoryFactory } from "../UpdateProductCategory/UpdatePro
 export const productCategoryRoutes = Router();
 
 productCategoryRoutes.route('/')
-  .post(ensuredAuthenticated(), (request, response) => { return createProductCategoryFactory().handle(request, response) } )
+  .post((request, response) => { return createProductCategoryFactory().handle(request, response) } )
   .get((request, response) => { return findAllProductCategoriesFactory().handle(request, response) } )
 
 productCategoryRoutes.route('/:id')
   .get((request, response) => { return findByIdProductCategoryFactory().handle(request, response) } )
-  .put(ensuredAuthenticated(), (request, response) => { return updateProductCategoryFactory().handle(request, response) } )
-  .delete(ensuredAuthenticated(), (request, response) => { return deleteProductCategoryFactory().handle(request, response) } )
+  .put((request, response) => { return updateProductCategoryFactory().handle(request, response) } )
+  .delete((request, response) => { return deleteProductCategoryFactory().handle(request, response) } )
 
 productCategoryRoutes.route('/ByCategory/:id_category')
   .get((request, response) => { return findByCategoryProductCategoryFactory().handle(request, response) })

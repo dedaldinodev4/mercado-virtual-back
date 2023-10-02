@@ -9,7 +9,13 @@ export class PrismaOrderRepository implements IOrderRepository {
   async findByToken(token: string): Promise<IOrder | null> {
     const order = await this.repository.findFirst(
       {
-        where: { token }
+        where: { token },
+        include: {
+          Payments: true,
+          Delives: true,
+          ProductShopOrders: true,
+          customer: true
+        }
       });
     return order ?? null;
   }
@@ -17,20 +23,52 @@ export class PrismaOrderRepository implements IOrderRepository {
   async findById(id: string): Promise<IOrder | null> {
     const order = await this.repository.findFirst(
       {
-        where: { id }
+        where: { id },
+        include: {
+          Payments: true,
+          Delives: true,
+          ProductShopOrders: true,
+          customer: true
+        }
       });
       return order ?? null;
   }
 
 
   async findAll(): Promise<IOrder[]> {
-    const orders = await this.repository.findMany({});
+    const orders = await this.repository.findMany({
+      include: {
+        Payments: true,
+        Delives: true,
+        ProductShopOrders: true,
+        customer: true
+      }
+    });
     return orders ?? [];
   }
 
   async findByCustomer(id_customer: string): Promise<IOrder[]> {
     const orders = await this.repository.findMany({
-      where: { id_customer }
+      where: { id_customer },
+      include: {
+        Payments: true,
+        Delives: true,
+        ProductShopOrders: true,
+        customer: true
+      }
+    });
+    return orders ?? [];
+  }
+
+  async findByShop(id_shop: string): Promise<IOrder[]> {
+    const orders = await this.repository.findMany({
+      where: { ProductShopOrders: { some: { productShop: { id_shop }}} },
+      include: {
+        Payments: true,
+        Delives: true,
+        ProductShopOrders: true,
+        customer: true
+      }
     });
     return orders ?? [];
   }

@@ -15,15 +15,15 @@ import { getProductImageFactory } from "../GetProductImage/GetProductImageFactor
 export const productImageRoutes = Router();
 
 productImageRoutes.route('/:id_product')
-  .post(ensuredAuthenticated(), upload.single('url'), (request, response) => { return createProductImageFactory().handle(request, response) } )
+  .post(upload.single('url'), (request, response) => { return createProductImageFactory().handle(request, response) } )
 
 productImageRoutes.route('/')
   .get((request, response) => { return findAllProductImagesFactory().handle(request, response) } )
 
 productImageRoutes.route('/:id')
   .get((request, response) => { return findByIdProductImageFactory().handle(request, response) } )
-  .put(ensuredAuthenticated(), upload.single('url'), (request, response) => { return updateProductImageFactory().handle(request, response) } )
-  .delete(ensuredAuthenticated(), (request, response) => { return deleteProductImageFactory().handle(request, response) } )
+  .put(upload.single('url'), (request, response) => { return updateProductImageFactory().handle(request, response) } )
+  .delete((request, response) => { return deleteProductImageFactory().handle(request, response) } )
 
 productImageRoutes.route('/ByProduct/:id_product')
   .get((request, response) => { return findByProductImagesFactory().handle(request, response) })

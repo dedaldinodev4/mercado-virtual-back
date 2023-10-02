@@ -1,5 +1,5 @@
 import { prismaClient } from "../../../utils/prismaClient";
-import { IUser, IUserCredentialsRequest, IUserCredentialsResponse, IUserRequest } from "../../../dtos/User";
+import { ICreateUserRequest, IUser, IUserCredentialsRequest, IUserCredentialsResponse, IUserRequest } from "../../../dtos/User";
 import { IUserRepository } from "../../IUserRepository";
 import { hashPassword } from '../../../utils/auth';
 import { serializeUser } from '../../../utils/user';
@@ -42,6 +42,20 @@ export class PrismaUserRepository implements IUserRepository {
     return  response ?? [];
   }
 
+  async create(user: ICreateUserRequest): Promise<IUser> {
+    const { email, username, password, role, status, avatar} = user
+    const createUser = await this.repository.create({
+      data: {
+        email,
+        username,
+        status,
+        avatar,
+        role,
+        password: hashPassword(password)
+      }
+    })
+    return createUser;
+  }
   async update(id: string, user: IUserRequest): Promise<IUser> {
     const userUpdate = await this.repository.update({
       data: user,

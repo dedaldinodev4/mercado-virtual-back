@@ -9,10 +9,12 @@ export class UpdateOrderController {
 
     async handle(request: Request, response: Response): Promise<Response> {
         const { id } = request.params;
-        const { total, status, totalDiscount } = request.body;
+        const { total, status, totalDiscount, quantity } = request.body;
 
         try {
-            const data = await this.updateOrderUseCase.execute(id, { total, status, totalDiscount });
+            const data = await this.updateOrderUseCase.execute(id, { 
+                total, status, totalDiscount, quantity 
+            });
 
             return response.status(201).json(data);
         } catch (err: any) {

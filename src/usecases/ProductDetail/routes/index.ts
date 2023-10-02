@@ -14,15 +14,15 @@ import { upload } from "../../../middlewares/multer";
 export const productDetailRoutes = Router();
 
 productDetailRoutes.route('/:id_product')
-  .post(ensuredAuthenticated(), upload.single('url'), (request, response) => { return createProductDetailFactory().handle(request, response) } )
+  .post(upload.single('url'), (request, response) => { return createProductDetailFactory().handle(request, response) } )
 
 productDetailRoutes.route('/')
   .get((request, response) => { return findAllProductDetailsFactory().handle(request, response) } )
 
 productDetailRoutes.route('/:id')
   .get((request, response) => { return findByIdProductDetailFactory().handle(request, response) } )
-  .put(ensuredAuthenticated(), upload.single('url'), (request, response) => { return updateProductDetailFactory().handle(request, response) } )
-  .delete(ensuredAuthenticated(), (request, response) => { return deleteProductDetailFactory().handle(request, response) } )
+  .put(upload.single('url'), (request, response) => { return updateProductDetailFactory().handle(request, response) } )
+  .delete((request, response) => { return deleteProductDetailFactory().handle(request, response) } )
 
 productDetailRoutes.route('/ByProduct/:id_product')
   .get((request, response) => { return findByProductDetailsFactory().handle(request, response) })

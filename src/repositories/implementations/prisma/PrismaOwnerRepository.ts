@@ -10,7 +10,8 @@ export class PrismaOwnerRepository implements IOwnerRepository {
   async findById(id: string): Promise<IOwner | null> {
     const owner = await this.repository.findFirst(
       {
-        where: { id }
+        where: { id },
+        include: { user: true }
       });
       return owner ?? null;
   }
@@ -19,13 +20,16 @@ export class PrismaOwnerRepository implements IOwnerRepository {
   async findByIdentity(identity: string): Promise<IOwner | null> {
     const owner = await this.repository.findFirst(
       {
-        where: { identity }
+        where: { identity },
+        include: { user: true }
       });
     return owner ?? null;
   }
 
   async findAll(): Promise<IOwner[]> {
-    const owners = await this.repository.findMany({});
+    const owners = await this.repository.findMany({
+      include: { user: true }
+    });
     return owners ?? [];
   }
 
@@ -34,7 +38,8 @@ export class PrismaOwnerRepository implements IOwnerRepository {
     const owner = await this.repository.findFirst({
       where: {
         id_user
-      }
+      },
+      include: { user: true }
     });
     return owner ?? null;
   }

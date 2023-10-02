@@ -13,13 +13,13 @@ import { updateProductShopFactory } from "../UpdateProductShop/UpdateProductShop
 export const productShopRoutes = Router();
 
 productShopRoutes.route('/')
-  .post(ensuredAuthenticated(), (request, response) => { return createProductShopFactory().handle(request, response) } )
+  .post((request, response) => { return createProductShopFactory().handle(request, response) } )
   .get((request, response) => { return findAllProductShopiesFactory().handle(request, response) } )
 
 productShopRoutes.route('/:id')
   .get((request, response) => { return findByIdProductShopFactory().handle(request, response) } )
-  .put(ensuredAuthenticated(), (request, response) => { return updateProductShopFactory().handle(request, response) } )
-  .delete(ensuredAuthenticated(), (request, response) => { return deleteProductShopFactory().handle(request, response) } )
+  .put((request, response) => { return updateProductShopFactory().handle(request, response) } )
+  .delete((request, response) => { return deleteProductShopFactory().handle(request, response) } )
 
 productShopRoutes.route('/ByShop/:id_shop')
   .get((request, response) => { return findByShopProductShopFactory().handle(request, response) })

@@ -13,13 +13,13 @@ import { findByOfferProductFactory } from "../FindByOfferProduct/FindByOfferProd
 export const productRoutes = Router();
 
 productRoutes.route('/')
-  .post(ensuredAuthenticated(), (request, response) => { return createProductFactory().handle(request, response) } )
+  .post((request, response) => { return createProductFactory().handle(request, response) } )
   .get((request, response) => { return findAllProductsFactory().handle(request, response) } )
 
 productRoutes.route('/:id')
   .get((request, response) => { return findByIdProductFactory().handle(request, response) } )
-  .put(ensuredAuthenticated(), (request, response) => { return updateProductFactory().handle(request, response) } )
-  .delete(ensuredAuthenticated(), (request, response) => { return deleteProductFactory().handle(request, response) } )
+  .put((request, response) => { return updateProductFactory().handle(request, response) } )
+  .delete((request, response) => { return deleteProductFactory().handle(request, response) } )
 
 
 productRoutes.route('/offers')

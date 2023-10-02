@@ -13,13 +13,13 @@ export const ownerRoutes = Router();
 
 
 ownerRoutes.route('/') 
-  .post(ensuredAuthenticated(), (request, response) => { return createOwnerFactory().handle(request, response) })
+  .post((request, response) => { return createOwnerFactory().handle(request, response) })
   .get((request, response) => { return findAllOwnersFactory().handle(request, response) })
 
 ownerRoutes.route(`/:id`)
   .get((request, response) => { return findByIdOwnerFactory().handle(request, response) })
-  .put(ensuredAuthenticated(), (request, response) => { return updateOwnerFactory().handle(request, response) })
-  .delete(ensuredAuthenticated(), (request, response) => { return deleteOwnerFactory().handle(request, response) })
+  .put((request, response) => { return updateOwnerFactory().handle(request, response) })
+  .delete((request, response) => { return deleteOwnerFactory().handle(request, response) })
 
 ownerRoutes.route(`/byUserId/:id_user`)
   .get((request, response) => { return findByIdUserOwnerFactory().handle(request, response) })

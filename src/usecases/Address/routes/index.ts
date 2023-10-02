@@ -13,12 +13,12 @@ export const addressRoutes = Router();
 
 addressRoutes.route('/')
   .get((request, response) => { return findAllAddressesFactory().handle(request, response) })
-  .post(ensuredAuthenticated(), (request, response) => { return createAddressFactory().handle(request, response) } )
+  .post((request, response) => { return createAddressFactory().handle(request, response) } )
 
 addressRoutes.route('/:id')
   .get((request, response) => { return findByIdAddressFactory().handle(request, response) } )
-  .put(ensuredAuthenticated(), (request, response) => { return updateAddressFactory().handle(request, response) } )
-  .delete(ensuredAuthenticated(), (request, response) => { return deleteAddressFactory().handle(request, response) } )
+  .put((request, response) => { return updateAddressFactory().handle(request, response) } )
+  .delete((request, response) => { return deleteAddressFactory().handle(request, response) } )
 
   addressRoutes.route('/userById/:id_user')
     .get((request, response) => { return findByIdUserAddressFactory().handle(request, response) } )

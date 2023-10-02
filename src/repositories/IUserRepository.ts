@@ -1,6 +1,7 @@
-import { IUser, IUserRequest, IUserCredentialsRequest, IUserCredentialsResponse } from '../dtos/User'
+import { IUser, IUserRequest, IUserCredentialsRequest, IUserCredentialsResponse, ICreateUserRequest } from '../dtos/User'
 
 export interface IUserRepository {
+  create(data: ICreateUserRequest): Promise<IUser | Error>
   findByEmail(email: string): Promise<IUser | null>;
   findById(id: string): Promise<IUser | null>;
   findAll(): Promise<IUser[]>;

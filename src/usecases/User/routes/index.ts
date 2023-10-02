@@ -7,18 +7,20 @@ import { findByEmailUserFactory } from "../FindByEmailUser/FindByEmailUserFactor
 import { updateUserFactory } from "../UpdateUser/UpdateUserFactory";
 import { deleteUserFactory } from "../DeleteUser/DeleteUserFactory";
 import { updateUserCredentialsFactory } from "../UpdateCredentialsUser/UpdateUserCredentialsFactory";
+import { createUserFactory } from '../CreateUser/CreateUserFactory'
 
 export const userRoutes = Router();
 
 userRoutes.route('/')
+  .post((request, response) => { return createUserFactory().handle(request, response) } )
   .get((request, response) => { return findAllUsersFactory().handle(request, response) } )
 
 userRoutes.route('/:id')
-  .put(ensuredAuthenticated(), (request, response) => { return updateUserFactory().handle(request, response) } )
-  .delete(ensuredAuthenticated(), (request, response) => { return deleteUserFactory().handle(request, response) } )
+  .put((request, response) => { return updateUserFactory().handle(request, response) } )
+  .delete((request, response) => { return deleteUserFactory().handle(request, response) } )
   
 userRoutes.route('/credentials/:id')
-  .put(ensuredAuthenticated(), (request, response) => { return updateUserCredentialsFactory().handle(request, response) } )
+  .put((request, response) => { return updateUserCredentialsFactory().handle(request, response) } )
 
 userRoutes.route('/ByEmail/:email')
   .get((request, response) => { return findByEmailUserFactory().handle(request, response) } )

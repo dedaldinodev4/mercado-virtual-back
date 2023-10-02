@@ -9,7 +9,8 @@ export class PrismaShopRepository implements IShopRepository {
   async findByName(name: string): Promise<IShop | null> {
     const shop = await this.repository.findFirst(
       {
-        where: { name }
+        where: { name },
+        include: { owner: true, address: true }
       });
     return shop ?? null;
   }
@@ -17,27 +18,32 @@ export class PrismaShopRepository implements IShopRepository {
   async findById(id: string): Promise<IShop | null> {
     const shop = await this.repository.findFirst(
       {
-        where: { id }
+        where: { id },
+        include: { owner: true, address: true }
       });
       return shop ?? null;
   }
 
 
   async findAll(): Promise<IShop[]> {
-    const shopies = await this.repository.findMany({});
+    const shopies = await this.repository.findMany({
+      include: { owner: true, address: true }
+    });
     return shopies ?? [];
   }
 
   async findByAddress(id_address: string): Promise<IShop[]> {
     const shopies = await this.repository.findMany({
-      where: { id_address }
+      where: { id_address },
+      include: { owner: true, address: true }
     });
     return shopies ?? [];
   }
 
   async findByOwner(id_owner: string): Promise<IShop[]> {
     const shopies = await this.repository.findMany({
-      where: { id_owner }
+      where: { id_owner },
+      include: { owner: true, address: true }
     });
     return shopies ?? [];
   }

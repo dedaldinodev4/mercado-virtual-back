@@ -3,6 +3,7 @@ import { Decimal } from "@prisma/client/runtime";
 export interface IUpdateOrderRequest {
   total: Decimal;
   totalDiscount: Decimal;
+  quantity: number;
   status: string;
 }
 

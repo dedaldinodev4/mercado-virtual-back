@@ -7,6 +7,7 @@ export interface IOrderRequest {
   id_session: string;
   total: Decimal;
   totalDiscount: Decimal;
+  quantity: number;
   token: string;
   status: string;
   id_customer: string;
@@ -15,6 +16,7 @@ export interface IOrderRequest {
 export interface IOrderUpdateRequest {
   total: Decimal;
   totalDiscount: Decimal;
+  quantity: number;
   status: string;
 }
 

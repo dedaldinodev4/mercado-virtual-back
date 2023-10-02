@@ -138,6 +138,7 @@ model Order {
   id                String             @id @default(uuid())
   id_session        String
   total             Decimal
+  quantity          Int
   totalDiscount     Decimal
   token             String
   status            String

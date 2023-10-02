@@ -20,3 +20,12 @@ export interface IUserCredentialsResponse {
   message: string;
   user: { email: string; }
 }
+
+export interface ICreateUserRequest {
+  username: string;
+  email: string;
+  password: string;
+  role: string;
+  status: boolean;
+  avatar: string;
+}

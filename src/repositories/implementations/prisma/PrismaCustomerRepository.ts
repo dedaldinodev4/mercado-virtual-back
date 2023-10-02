@@ -10,7 +10,8 @@ export class PrismaCustomerRepository implements ICustomerRepository {
   async findById(id: string): Promise<ICustomer | null> {
     const customer = await this.repository.findFirst(
       {
-        where: { id }
+        where: { id },
+        include: { user: true }
       });
       return customer ?? null;
   }
@@ -19,19 +20,23 @@ export class PrismaCustomerRepository implements ICustomerRepository {
   async findByIdentity(identity: string): Promise<ICustomer | null> {
     const customer = await this.repository.findFirst(
       {
-        where: { identity }
+        where: { identity },
+        include: { user: true }
       });
     return customer ?? null;
   }
 
   async findAll(): Promise<ICustomer[]> {
-    const customers = await this.repository.findMany({});
+    const customers = await this.repository.findMany({
+      include: { user: true }
+    });
     return customers ?? [];
   }
 
   async findByType(id_customerType: string): Promise<ICustomer[]> {
     const customers = await this.repository.findMany({
-      where: { id_customerType }
+      where: { id_customerType },
+      include: { user: true }
     });
     return customers ?? [];
   }
@@ -40,7 +45,8 @@ export class PrismaCustomerRepository implements ICustomerRepository {
     const customer = await this.repository.findFirst({
       where: {
         id_user
-      }
+      },
+      include: { user: true }
     });
     return customer ?? null;
   }

@@ -10,13 +10,13 @@ export class CreateOrderController {
   async handle(request: Request, response: Response): Promise<Response> {
     const {
       token, id_session, id_customer,
-      status, totalDiscount, total
+      status, totalDiscount, total, quantity
     } = request.body;
 
     try {
       const data = await this.createOrderUseCase.execute({
         token, id_session, id_customer,
-        status, totalDiscount, total
+        status, totalDiscount, total, quantity
       });
 
       return response.status(201).json(data);
